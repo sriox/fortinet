@@ -1,0 +1,12 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.p{
+    background-color: red;
+}
+
+.table thead{
+    background-color: #5B98BB;
+    color: white;
+    font-weight: bold;
+}
