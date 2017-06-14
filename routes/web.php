@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('projects', 'ProjectsController@index')->name('projects.index');
-Route::get('projects/create', 'ProjectsController@create')->name('projects.create');
-Route::post('projects/store', 'ProjectsController@store')->name('projects.store');
-
 Route::get('dashboard', function(){
     return view('dashboard.index');
 })->name('dashboard.index');
