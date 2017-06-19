@@ -8,7 +8,7 @@
 </div>
 <br>
 <div class="row">
-<div class="col-md-8">
+<div class="col-md-12">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -28,6 +28,7 @@
             @endforeach
         </tbody>
     </table>
+    <div class=" text-center">{{ $ses->links() }}</div>
 </div>
 </div>
 @endsection

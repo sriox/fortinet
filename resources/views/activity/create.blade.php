@@ -18,9 +18,9 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="name" class="control-label col-md-4">Activity Type</label>
+                        <label for="name" class="control-label col-md-4">Activity Type <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <select name="activityType" id="activityType" class="form-control">
+                            <select name="activityType" id="activityType" class="form-control" required>
                                 <option value="">-- Select --</option>
                                 @foreach($activityTypes as $type)
                                 <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -29,9 +29,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="date" class="control-label col-md-4">Date</label>
+                        <label for="date" class="control-label col-md-4">Date <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" name="date" id="date" class="form-control">
+                            <input type="text" name="date" id="date" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -41,9 +41,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="country" class="control-label col-md-4">Country</label>
+                        <label for="country" class="control-label col-md-4">Country <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <select name="country" id="country" class="form-control">
+                            <select name="country" id="country" class="form-control" required>
                                 <option value="">-- Select --</option>
                                 @foreach($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -52,9 +52,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="technology" class="control-label col-md-4">Technology</label>
+                        <label for="technology" class="control-label col-md-4">Technology <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <select name="technology" id="technology" class="form-control">
+                            <select name="technology" id="technology" class="form-control" required>
                                 <option value="">-- Select --</option>
                                  @foreach($technologies as $technology)
                                 <option value="{{ $technology->id }}">{{ $technology->name }}</option>
@@ -69,9 +69,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="se" class="control-label col-md-4">SE</label>
+                        <label for="se" class="control-label col-md-4">SE <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <select name="se" id="se" class="form-control">
+                            <select name="se" id="se" class="form-control" required>
                                 <option value="">-- Select --</option>
                                 @foreach($ses as $se)
                                 <option value="{{ $se->id }}">{{ $se->name }}</option>
@@ -86,9 +86,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="control-label col-md-4">Description</label>
+                        <label for="description" class="control-label col-md-4">Description <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
+                            <textarea name="description" id="description" cols="30" rows="5" class="form-control" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
