@@ -1,4 +1,8 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+@section('scripts')
+<script src="{{ asset('js/tables.js') }}"></script>
+@endsection
+@section('content')
 <div class="content-header">
     <header>
         <h1>All Activities</h1>
