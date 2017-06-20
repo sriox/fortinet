@@ -14,7 +14,7 @@ class SeController extends Controller
      */
     public function index()
     {
-        $ses = Se::withTrashed()->paginate(20);
+        $ses = Se::withTrashed()->get()->sortBy('name');
         return view('se.index', ['ses' => $ses]);
     }
 

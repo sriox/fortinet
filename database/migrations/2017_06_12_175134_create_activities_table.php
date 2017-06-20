@@ -21,11 +21,11 @@ class CreateActivitiesTable extends Migration
             $table->integer('technology_id');
             $table->integer('se_id');
             $table->date('date');
-            $table->integer('quarter');
-            $table->string('smart_ticket');
-            $table->string('customer');
+            $table->integer('quarter')->nullable();
+            $table->string('smart_ticket')->nullable();
+            $table->string('customer')->nullable();
             $table->string('description', 255);
-            $table->string('activity_executed', 255);
+            $table->string('activity_executed', 255)->nullable();
             $table->date('execution_date')->nullable();
             $table->integer('time_used')->default(0);
             $table->timestamps();

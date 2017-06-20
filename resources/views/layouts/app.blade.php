@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,92 +13,69 @@
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.structure.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery-ui.theme.min.css') }}" rel="stylesheet">    
+    <link href="{{ asset('css/jquery-ui.theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    
+    <!-- Plugins -->
+    <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/datatables/jquery.dataTables.min.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+
+    <!-- Assets AdminLTE -->
+    <link href="{{ asset('vendor/adminlte/css/AdminLTE.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/adminlte/css/skins/_all-skins.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+
     </script>
-    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
+    <script src="{{ asset('plugins/jQueryUI/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/fastclick/fastclick.min.js') }}"></script>
+    <!-- <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script> -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
+    <!-- Scripts AdminLTE -->
+    <!-- <script src="{{ asset('vendor/adminlte/js/app.min.js') }}"></script> -->
+
+    
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <div id="header" class="main-header">
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Fortinet
-                    </a>
-                </div>
+            @include('partials.header') 
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        @if(Auth::check())
-                        <li><a href="{{ route('activityTypes.index') }}">Activity Types</a></li>
-                        <li><a href="{{ route('countries.index') }}">Countries</a></li>
-                        <li><a href="{{ route('technologies.index') }}">Technologies</a></li>
-                        <li><a href="{{ route('se.index') }}">SE</a></li>
-                        <li><a href="{{ route('activities.index') }}">My Activities</a></li>
-                        <li><a href="{{ route('activities.all') }}">All Activities</a></li>
-                        @endif
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        
+        </div>
+        @if(!Auth::guest())
+        <aside class="main-sidebar">
+            @include('partials.sidebar')
+        </aside>
+        @endif
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
+        <!-- Scripts -->
+        <!-- <script src="{{ asset('js/app.js') }}"></script> -->
     </div>
-    <div class="container">
-        @yield('content')
-    </div>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
+
 </html>
