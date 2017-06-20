@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Socialite;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -67,5 +69,36 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        
+        $authenticatedUser = User::where('email', '=', $user->email)->first();
+        
+        if($authenticatedUser){
+            Auth::loginUsingId($authenticatedUser->id);
+            session(['avatar' => $user->avatar]);
+            return redirect()->route('home');
+        }else{
+            return redirect('/');
+        }
+        
     }
 }

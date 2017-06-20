@@ -16,6 +16,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('login/google', 'Auth\RegisterController@redirectToProvider');
+Route::get('login/callback', 'Auth\RegisterController@handleProviderCallback');
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('dashboard', function(){
         return view('dashboard.index');

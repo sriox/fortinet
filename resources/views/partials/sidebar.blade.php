@@ -4,7 +4,7 @@
         <!-- user panel (Optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="vendor/adminlte/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="{{ Session::get('avatar') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
@@ -30,6 +30,7 @@
             <li class="header">TRACKING OPTIONS</li>
             <!-- Optionally, you can add icons to the links -->
             <li><a href="{{ route('activities.index') }}">Activities</a></li>
+            <li><a href="{{ route('activities.all') }}">All Activities</a></li>
         </ul>
         <ul class="sidebar-menu">
             <li class="header">REPORTING OPTIONS</li>

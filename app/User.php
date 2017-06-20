@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Activity');
     }
+    
+    public function socialProviders()
+    {
+        return $this->hastMany('App\SocialProvider');
+    }
 }
