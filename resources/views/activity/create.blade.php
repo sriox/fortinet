@@ -34,12 +34,12 @@
                             <input type="text" name="date" id="date" class="form-control" required>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="quarter" class="control-label col-md-4">Quarter</label>
                         <div class="col-md-6">
                             <input type="text" name="quarter" id="quarter" class="form-control">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="country" class="control-label col-md-4">Country <span class="required-field">*</span></label>
                         <div class="col-md-6">

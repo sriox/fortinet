@@ -60,7 +60,6 @@ class ActivityController extends Controller
         $this->validate($request, [
             'activityType' => 'required',
             'date' => 'required',
-            'quarter' => 'required',
             'country' => 'required',
             'technology' => 'required',
             'se' => 'required',
@@ -72,7 +71,7 @@ class ActivityController extends Controller
             'user_id' => Auth::id(),
             'activity_type_id' => $request->input('activityType'),
             'date' => $request->input('date'),
-            'quarter' => $request->input('quarter'),
+            'quarter' => $this->quarter(date($request->input('date'))),
             'country_id' => $request->input('country'),
             'technology_id' => $request->input('technology'),
             'smart_ticket' => $request->input('smartTicket'),
@@ -85,6 +84,22 @@ class ActivityController extends Controller
         ]);
         
         return redirect()->route('activities.index');
+    }
+    
+    private function quarter($ts) {
+        $date = date_create($ts);
+        $month = (int)date_format($date, 'm');
+        $quarter = 0;
+        if($month < 4)
+            $quarter = 1;
+        else if($month >=4 && $month < 7)
+            $quarter = 2;
+        else if($month >=7 && $month < 10)
+            $quarter = 3;
+        else if($month >=10 && $month < 13)
+            $quarter = 4;
+        
+        return $quarter;
     }
 
     /**
