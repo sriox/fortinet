@@ -4,7 +4,11 @@
         <!-- user panel (Optional) -->
         <div class="user-panel">
             <div class="pull-left image">
+               @if(Session::has('avatar'))
                 <img src="{{ Session::get('avatar') }}" class="img-circle" alt="User Image">
+                @else
+                <img src="{{ asset('vendor/adminlte/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                @endif
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
