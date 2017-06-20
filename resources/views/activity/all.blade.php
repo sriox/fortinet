@@ -31,7 +31,8 @@
                         <th>Activity Executed</th>
                         <th>Time Used (Minutes)</th>
                         <th>Time Used (Hours)</th>
-                        <th colspan="2">Actions</th>
+                        <th>Actions</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
