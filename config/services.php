@@ -36,8 +36,8 @@ return [
     ],
     
     'google' => [
-        'client_id' => '785134764920-unn6bub61ra6v9f5ua58ld2q1jm8fhjf.apps.googleusercontent.com',
-        'client_secret' => 'lD5yHwkBOTG-dP5eAPSIWIKF',
+        'client_id' => '735742940881-sv0bqcm1jpend37ag7khtklcm9sjivrk.apps.googleusercontent.com',
+        'client_secret' => 'zjpQXl31B2QufI0uqsAn_OWV',
         'redirect' => 'http://set.fortilatam.com/login/callback',
     ],
 
