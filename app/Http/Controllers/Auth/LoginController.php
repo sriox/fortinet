@@ -56,10 +56,6 @@ class LoginController extends Controller
             echo $e;
         }
         
-        
-        
-        //$user = Socialite::with('google')->user();
-        
         $authenticatedUser = User::where('email', '=', $user->email)->first();
         
         if($authenticatedUser){
@@ -68,7 +64,7 @@ class LoginController extends Controller
                 'provider' => 'google'
             ]);
             Auth::loginUsingId($authenticatedUser->id);
-            session(['avatar' => $user->avatar]);
+            session(['avatar' => $socialUser->avatar]);
             return redirect()->route('home');
         }else{
             return redirect('/');
