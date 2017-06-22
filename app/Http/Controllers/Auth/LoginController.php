@@ -47,12 +47,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     
-    public function googleLogin()
+    /*public function googleLogin()
     {
         return Socialite::driver('google')
             ->scopes(['openid', 'profile', 'email', Google_Service_People::CONTACTS_READONLY])
             ->redirect();
-    }
+    }*/
     
     /**
      * Redirect the user to the GitHub authentication page.
@@ -61,7 +61,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver('google')->scopes(['https://www.googleapis.com/auth/gmail.readonly'])->redirect();
     }
 
     /**
@@ -85,7 +85,7 @@ class LoginController extends Controller
         // $user->token;
     }*/
     
-    public function handleProviderCallback(Request $request)
+    /*public function handleProviderCallback(Request $request)
     {
         $user = Socialite::driver('google')->stateless()->user();
 
@@ -108,11 +108,11 @@ class LoginController extends Controller
 
         dd($results);
         
-    }
-    /*public function handleProviderCallback()
+    }*/
+    public function handleProviderCallback()
     {
         try{
-            $socialUser = Socialite::driver('google')->user();
+            $socialUser = Socialite::driver('google')->stateless()->user();
         }catch(Exception $e){
             echo $e;
         }
@@ -132,7 +132,7 @@ class LoginController extends Controller
             return redirect('/');
         }
         
-    }*/
+    }
     
     
 }
