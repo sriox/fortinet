@@ -94,7 +94,7 @@ class RegisterController extends Controller
             echo $e;
         }
         
-        $authenticatedUser = User::where('email', '=', $user->email)->first();
+        $authenticatedUser = User::where('email', '=', $socialUser->email)->first();
         
         if($authenticatedUser){
             $authenticatedUser->socialProviders()->create([
