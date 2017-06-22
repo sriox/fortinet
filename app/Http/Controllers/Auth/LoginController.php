@@ -54,7 +54,7 @@ class LoginController extends Controller
             ->redirect();
     }
     
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
         $user = Socialite::driver('google')->user();
 
@@ -66,7 +66,7 @@ class LoginController extends Controller
         ];
 
         $client = new Google_Client();
-        $client->setApplicationName("Laravel");
+        $client->setApplicationName("set.fortinet.com");
         $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
         $client->setAccessToken(json_encode($google_client_token));
 
