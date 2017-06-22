@@ -87,7 +87,7 @@ class LoginController extends Controller
     
     public function handleProviderCallback(Request $request)
     {
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
 
         // Set token for the Google API PHP Client
         $google_client_token = [
