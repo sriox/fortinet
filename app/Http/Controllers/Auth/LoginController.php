@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Socialite;
 use Auth;
 use App\User;
+use App\SocialProvider;
 
 class LoginController extends Controller
 {
@@ -49,12 +50,23 @@ class LoginController extends Controller
     
     public function handleProviderCallback(Request $request)
     {
-        //$user = Socialite::driver('google')->user();
-        $user = Socialite::with('google')->user();
+        try{
+            $socialUser = Socialite::driver('google')->user();
+        }catch(Exception $e){
+            echo $e;
+        }
+        
+        
+        
+        //$user = Socialite::with('google')->user();
         
         $authenticatedUser = User::where('email', '=', $user->email)->first();
         
         if($authenticatedUser){
+            $authenticatedUser->socialProviders()->create([
+                'provider_id' => $socialUser->id,
+                'provider' => 'google'
+            ]);
             Auth::loginUsingId($authenticatedUser->id);
             session(['avatar' => $user->avatar]);
             return redirect()->route('home');
