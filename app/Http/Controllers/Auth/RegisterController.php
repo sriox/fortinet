@@ -89,15 +89,17 @@ class RegisterController extends Controller
     public function handleProviderCallback()
     {
         try{
-            $socialUser = Socialite::driver('google')->user();
+            //$socialUser = Socialite::driver('google')->user();
         }catch(Exception $e){
             echo $e;
         }
         
-        $authenticatedUser = User::where('email', '=', $socialUser->email)->first();
+        //$authenticatedUser = User::where('email', '=', $socialUser->email)->first();
+        $authenticatedUser = User::where('email', '=', 'sergioriosg@gmail.com')->first();
         
         if($authenticatedUser){
             $authenticatedUser->socialProviders()->create([
+                'user_id' => $authenticatedUser->id,
                 'provider_id' => $socialUser->id,
                 'provider' => 'google'
             ]);
