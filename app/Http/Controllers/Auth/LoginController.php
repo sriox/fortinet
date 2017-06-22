@@ -61,7 +61,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('google')->scopes(['https://www.googleapis.com/auth/gmail.readonly'])->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     /**
