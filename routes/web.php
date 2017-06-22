@@ -17,7 +17,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('login/callback', [
-    'uses' => 'Auth\LoginController@handleProviderCallback',
+    'uses' => 'Auth\RegisterController@handleProviderCallback',
     'as' => 'login.callback'
 ]);
 

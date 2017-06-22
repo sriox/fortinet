@@ -86,5 +86,27 @@ class RegisterController extends Controller
      *
      * @return Response
      */
-    
+    public function handleProviderCallback(Request $request)
+    {
+        try{
+            $socialUser = Socialite::driver('google')->user();
+        }catch(Exception $e){
+            echo $e;
+        }
+        
+        $authenticatedUser = User::where('email', '=', $user->email)->first();
+        
+        if($authenticatedUser){
+            $authenticatedUser->socialProviders()->create([
+                'provider_id' => $socialUser->id,
+                'provider' => 'google'
+            ]);
+            Auth::loginUsingId($authenticatedUser->id);
+            session(['avatar' => $socialUser->avatar]);
+            return redirect()->route('home');
+        }else{
+            return redirect('/');
+        }
+        
+    }
 }
