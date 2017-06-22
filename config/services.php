@@ -36,9 +36,9 @@ return [
     ],
     
     'google' => [
-        'client_id' => '735742940881-sv0bqcm1jpend37ag7khtklcm9sjivrk.apps.googleusercontent.com',
-        'client_secret' => 'zjpQXl31B2QufI0uqsAn_OWV',
-        'redirect' => 'http://set.fortilatam.com/login/callback',
+        'client_id' => env('GOOGLE_SERVER_KEY'),
+        'client_secret' => env('GOOGLE_SERVER_PRIVATE'),
+        'redirect' => env('GOOGLE_SERVER_REDIRECT'),
     ],
 
 ];
