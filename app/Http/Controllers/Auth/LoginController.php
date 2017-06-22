@@ -54,6 +54,37 @@ class LoginController extends Controller
             ->redirect();
     }
     
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    /*public function handleProviderCallback()
+    {
+        $user = Socialite::driver('google')->stateless()->user();
+        
+        // OAuth Two Providers
+        $token = $user->token;
+        $refreshToken = $user->refreshToken; // not always provided
+        $expiresIn = $user->expiresIn;
+
+        // OAuth One Providers
+        $token = $user->token;
+        $tokenSecret = $user->tokenSecret;
+
+        // $user->token;
+    }*/
+    
     public function handleProviderCallback(Request $request)
     {
         $user = Socialite::driver('google')->user();
