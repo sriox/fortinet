@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Socialite;
 use Auth;
 use App\User;
@@ -46,9 +47,10 @@ class LoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
     
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
-        $user = Socialite::driver('google')->user();
+        //$user = Socialite::driver('google')->user();
+        $user = Socialite::with('google')->user();
         
         $authenticatedUser = User::where('email', '=', $user->email)->first();
         
