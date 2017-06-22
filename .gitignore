@@ -9,6 +9,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .ENV
-.sql
+*.sql
 /database/migrations
 
