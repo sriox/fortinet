@@ -43,8 +43,8 @@
             <li><a href="#">Export Data</a></li>
         </ul>
         <ul class="sidebar-menu">
-            <li class="header">ADMIN OPTIONS</li>
-            <!-- Optionally, you can add icons to the links -->
+            <li class="header">ADMIN OPTIONS</li>            
+            <li><a href="{{ route('users.index') }}">Admin Users</a></li>
             <li><a href="{{ route('countries.index') }}">Admin Countries</a></li>
             <li><a href="{{ route('activityTypes.index') }}">Admin Activity Types</a></li>
             <li><a href="{{ route('technologies.index') }}">Admin Technologies</a></li>

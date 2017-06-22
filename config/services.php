@@ -36,9 +36,9 @@ return [
     ],
     
     'google' => [
-        'client_id' => '830593369487-srcblpvvcaqrivah9vaguco4ed1icbv1.apps.googleusercontent.com',
-        'client_secret' => 'o83qFh738U1biyMrPtF-aMgT',
-        'redirect' => 'http://www.local.fortinet.com/fortinet-v2/public/login/callback',
+        'client_id' => '351639517903-hh3geugpebm3b6l6h4uj2t1u40ngpf2q.apps.googleusercontent.com',
+        'client_secret' => 'CIiDZlrpSgNpv1oh-8t_OxNt',
+        'redirect' => 'http://set.fortilatam.com/login/callback',
     ],
 
 ];

@@ -16,17 +16,46 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('login/google', 'Auth\RegisterController@redirectToProvider');
-Route::get('login/callback', 'Auth\RegisterController@handleProviderCallback');
+Route::get('login/callback', [
+    'uses' => 'Auth\LoginController@handleProviderCallback',
+    'as' => 'login.callback'
+]);
+
+Route::get('login', [
+    'uses' => 'Auth\LoginController@googleLogin',
+    'as' => 'login'
+]);
+Route::get('loginm', [
+    'uses' => 'Auth\LoginController@showLoginForm',
+    'as' => 'loginm'
+]);
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('dashboard', function(){
         return view('dashboard.index');
     })->name('dashboard.index');
 
-    Route::get('users', function(){
-        return view('users.index');
-    })->name('users.index');
+    Route::group(['prefix' => 'users'], function(){
+        Route::get('/', [
+            'uses' => 'UsersController@index',
+            'as' => 'users.index'
+        ]);
+        Route::get('delete', [
+            'uses' => 'UsersController@delete',
+            'as' => 'users.delete'
+        ]);
+        
+        Route::get('create', [
+            'uses' => 'UsersController@create',
+            'as' => 'users.create'
+        ]);
+        Route::post('store', [
+            'uses' => 'UsersController@store',
+            'as' => 'users.store'
+        ]);
+        
+    });
+    
 
     Route::get('reports', function(){
         return view('reports.index');
