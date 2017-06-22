@@ -40,6 +40,6 @@ class User extends Authenticatable
     
     public function socialProviders()
     {
-        return $this->hastMany('App\SocialProvider');
+        return $this->hasMany('App\SocialProvider');
     }
 }
