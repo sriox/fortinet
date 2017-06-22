@@ -88,6 +88,7 @@ class RegisterController extends Controller
      */
     public function handleProviderCallback()
     {
+        dd(Socialite::driver('google')->user);
         try{
             //$socialUser = Socialite::driver('google')->user();
         }catch(Exception $e){
