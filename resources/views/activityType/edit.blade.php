@@ -1,12 +1,12 @@
 @extends('layouts.app') @section('content')
-<div class="container">
+<div class="content body">
   
-   <form action="{{ route('users.store') }}" method="post" class="form-horizontal">
+   <form action="{{ route('activityTypes.update', ['id' => $activityType->id]) }}" method="post" class="form-horizontal">
    {{ csrf_field() }}
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">New User</div>
+                <div class="panel-heading">Edit Activity Type</div>
                 <div class="panel-body">
                    @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -18,18 +18,16 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="name" class="control-label col-md-4">Name</label>
-                        <div class="col-md-6"><input type="text" class="form-control" name="name" id="name" required></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="control-label col-md-4">Email</label>
-                        <div class="col-md-6"><input type="text" class="form-control" name="email" id="email" required></div>
+                        <label for="name" class="control-label col-md-4">Activity Type</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="name" id="name" value="{{ $activityType->name }}" required>
+                        </div>
                     </div>                            
                 </div>
                 <div class="panel-footer">
                     <div class="form-group">
                        <div class="col-md-2 col-md-offset-10">
-                           <button class="btn btn-primary" type="submit">Save</button>
+                           <button class="btn btn-primary" type="submit">Update</button>
                        </div>
                     </div>
                 </div>

@@ -9,6 +9,9 @@
     </header>
 </div>
 <div class="content body">
+  @if(Session::has('msg'))
+   <div class="alert alert-success">{{ Session::get('msg') }}</div>
+   @endif
     <div class="row">
         <div class="col-md-3"><a href="{{ route('activityTypes.create') }}" class="btn btn-primary">Add Activity Type</a></div>
     </div>
@@ -29,7 +32,7 @@
                     <tr>
                         <td>{{ $type->name }}</td>
                         <td>{{ is_null($type->deleted_at) ? 'Active': 'Inactive' }}</td>
-                        <td><a href="#">Edit</a></td>
+                        <td><a href="{{ route('activityTypes.edit', ['id' => $type->id]) }}">Edit</a></td>
                         <td><a href="{{ route('activityTypes.delete', ['id' => $type->id]) }}">@if($type->trashed())Activate @else Delete @endif</a></td>
                     </tr>
                     @endforeach

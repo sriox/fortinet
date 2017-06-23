@@ -10,6 +10,9 @@
 </div>
 
 <div class="content body">
+   @if(Session::has('msg'))
+   <div class="alert alert-success">{{ Session::get('msg') }}</div>
+   @endif
     <div class="row">
         <div class="col-md-3"><a href="{{ route('countries.create') }}" class="btn btn-primary">Add Country</a></div>
     </div>
@@ -32,7 +35,7 @@
                         <td>{{ $country->name }}</td>
                         <td>{{ $country->territory }}</td>
                         <td>{{ is_null($country->deleted_at) ? 'Active': 'Inactive' }}</td>
-                        <td><a href="#">Edit</a></td>
+                        <td><a href="{{ route('countries.edit', ['id' => $country->id]) }}">Edit</a></td>
                         <td><a href="{{ route('countries.delete', ['id' => $country->id]) }}">@if($country->trashed()) Activate @else Delete @endif</a></td>
                     </tr>
                     @endforeach

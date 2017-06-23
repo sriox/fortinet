@@ -1,6 +1,11 @@
 @extends('layouts.app') 
 @section('scripts')
+<link rel="stylesheet" href="{{ asset('plugins/perfectscrollbar/perfect-scrollbar.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/activity-index.css') }}">
+
+<script src="{{ asset('plugins/perfectscrollbar/perfect-scrollbar.jquery.min.js') }}"></script>
 <script src="{{ asset('js/tables.js') }}"></script>
+<script src="{{ asset('js/activity-index.js') }}"></script>
 @endsection
 @section('content')
 <div class="content-header">
@@ -9,12 +14,16 @@
     </header>
 </div>
 <div class="content body">
+   @if(Session::has('msg'))
+   <div class="alert alert-success">{{ Session::get('msg') }}</div>
+   @endif
     <div class="row">
         <div class="col-md-3"><a href="{{ route('activities.create') }}" class="btn btn-primary">Add Activity</a></div>
     </div>
     <br>
     <div class="row">
         <div class="col-md-12">
+           <div id="table_canvas">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -51,12 +60,14 @@
                         <td>{{ $activity->activity_executed }}</td>
                         <td>{{ $activity->time_used }}</td>
                         <td>{{ $activity->time_used / 60 }}</td>
-                        <td><a href="#">Edit</a></td>
-                        <td><a href="#">Delete</a></td>
+                        <td>@if($activity->user->id == Auth::id())<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}">Edit</a>@endif</td>
+                        <td>@if($activity->user->id == Auth::id())<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a>@endif</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            <br />
+            </div>
         </div>
     </div>
 </div>

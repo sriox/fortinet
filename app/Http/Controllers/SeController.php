@@ -52,11 +52,13 @@ class SeController extends Controller
         $se = Se::withTrashed()->find($id);
         if($se->trashed()){
             $se->restore();
+            $action = 'activated';
         }else{
             $se->delete();
+            $action = 'inactivated';
         }
         
-        return redirect()->back();
+        return redirect()->back()->with('msg', 'The SE '.$se->name.' was '.$action);
     }
 
     /**
@@ -78,7 +80,8 @@ class SeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $se = Se::find($id);
+        return view('se.edit', ['se' => $se]);
     }
 
     /**
@@ -90,7 +93,15 @@ class SeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:ses'
+        ]);
+        
+        $se = Se::find($id);
+        $se->name = $request->input('name');
+        $se->save();
+        
+        return redirect()->route('se.index')->with('msg', 'SE '.$request->name.' was updated');
     }
 
     /**

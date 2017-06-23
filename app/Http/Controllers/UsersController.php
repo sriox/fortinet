@@ -69,7 +69,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -81,7 +82,17 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$id
+        ]);
+        
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        
+        return redirect()->route('users.index')->with('msg', 'User '.$request->name.' was updated');
     }
 
     /**
@@ -96,6 +107,15 @@ class UsersController extends Controller
     }
     public function delete($id)
     {
-        //
+        $user = User::withTrashed()->find($id);
+        if($user->trashed()){
+            $user->restore();
+            $action = 'activated';
+        }else{
+            $user->delete();
+            $action = 'inactivated';
+        }
+        
+        return redirect()->back()->with('msg', 'The activity type '.$user->name.' was '.$action);
     }
 }

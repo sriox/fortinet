@@ -119,9 +119,24 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        $activity = Activity::find($id);
+        $page = $request->get('page');
+        
+        $countries = Country::all()->sortBy('name');
+        $ses = Se::all()->sortBy('name');
+        $technologies = Technology::whereNull('deleted_at')->get()->sortBy('name');
+        $activityTypes = ActivityType::all()->sortBy('name');
+        
+        return view('activity.edit', [
+            'activity' => $activity,
+            'countries' => $countries,
+            'ses' => $ses,
+            'technologies' => $technologies,
+            'activityTypes' => $activityTypes,
+            'page' => $page
+        ]);
     }
 
     /**
@@ -133,7 +148,34 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'activityType' => 'required',
+            'date' => 'required',
+            'country' => 'required',
+            'technology' => 'required',
+            'se' => 'required',
+            'description' => 'required',
+            'timeUsed' => 'required|integer'
+        ]);
+        
+        $activity = Activity::find($id);
+        
+        $activity->activity_type_id = $request->input('activityType');
+        $activity->date = $request->input('date');
+        $activity->quarter = $this->quarter(date($request->input('date')));
+        $activity->country_id = $request->input('country');
+        $activity->technology_id = $request->input('technology');
+        $activity->smart_ticket = $request->input('smartTicket');
+        $activity->se_id = $request->input('se');
+        $activity->customer = $request->input('customer');
+        $activity->description = $request->input('description');
+        $activity->activity_executed = $request->input('activityExecuted');
+        $activity->execution_date = $request->input('executionDate');
+        $activity->time_used = $request->input('timeUsed');
+        
+        $activity->save();
+        
+        return redirect()->route('activities.'.$request->get('page'))->with('msg', 'The activity was updated');
     }
 
     /**

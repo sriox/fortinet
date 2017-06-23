@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'UsersController@index',
             'as' => 'users.index'
         ]);
-        Route::get('delete', [
+        Route::get('delete/{id}', [
             'uses' => 'UsersController@delete',
             'as' => 'users.delete'
         ]);
@@ -52,6 +52,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('store', [
             'uses' => 'UsersController@store',
             'as' => 'users.store'
+        ]);
+        
+        Route::get('edit/{id}', [
+            'uses' => 'UsersController@edit',
+            'as' => 'users.edit'
+        ]);  
+
+        Route::post('update/{id}', [
+            'uses' => 'UsersController@update',
+            'as' => 'users.update'
         ]);
         
     });
@@ -82,6 +92,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('delete/{id}', [
             'uses' => 'ActivityTypeController@delete',
             'as' => 'activityTypes.delete'
+        ]);  
+
+        Route::get('edit/{id}', [
+            'uses' => 'ActivityTypeController@edit',
+            'as' => 'activityTypes.edit'
+        ]);  
+
+        Route::post('update/{id}', [
+            'uses' => 'ActivityTypeController@update',
+            'as' => 'activityTypes.update'
         ]);    
     });
 
@@ -105,6 +125,16 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'CountryController@delete',
             'as' => 'countries.delete'
         ]);
+        
+        Route::get('edit/{id}', [
+            'uses' => 'CountryController@edit',
+            'as' => 'countries.edit'
+        ]);  
+
+        Route::post('update/{id}', [
+            'uses' => 'CountryController@update',
+            'as' => 'countries.update'
+        ]); 
     });
 
     Route::group(['prefix' => 'technologies'], function(){
@@ -127,6 +157,16 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'TechnologyController@delete',
             'as' => 'technologies.delete'
         ]);
+        
+        Route::get('edit/{id}', [
+            'uses' => 'TechnologyController@edit',
+            'as' => 'technologies.edit'
+        ]);  
+
+        Route::post('update/{id}', [
+            'uses' => 'TechnologyController@update',
+            'as' => 'technologies.update'
+        ]); 
     });
 
     Route::group(['prefix' => 'se'], function(){
@@ -149,6 +189,16 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'SeController@delete',
             'as' => 'se.delete'
         ]);
+        
+        Route::get('edit/{id}', [
+            'uses' => 'SeController@edit',
+            'as' => 'se.edit'
+        ]);  
+
+        Route::post('update/{id}', [
+            'uses' => 'SeController@update',
+            'as' => 'se.update'
+        ]); 
     });
 
     Route::group(['prefix' => 'activities'], function(){
@@ -170,7 +220,22 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('store', [
             'uses' => 'ActivityController@store',
             'as' => 'activities.store'
-        ]);    
+        ]);
+        
+        Route::get('edit/{id}', [
+            'uses' => 'ActivityController@edit',
+            'as' => 'activities.edit'
+        ]);  
+
+        Route::post('update/{id}', [
+            'uses' => 'ActivityController@update',
+            'as' => 'activities.update'
+        ]);     
+        
+        Route::post('destroy/{id}', [
+            'uses' => 'ActivityController@destroy',
+            'as' => 'activities.destroy'
+        ]);
     });
 });
 

@@ -54,11 +54,13 @@ class CountryController extends Controller
         $country = Country::withTrashed()->find($id);
         if($country->trashed()){
             $country->restore();
+            $action = 'activated';
         }else{
             $country->delete();
+            $action = 'inactivated';
         }
         
-        return redirect()->back();
+        return redirect()->back()->with('msg', 'The country '.$country->name.' was '.$action);
     }
 
     /**
@@ -80,7 +82,8 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $country = Country::find($id);
+        return view('country.edit', ['country' => $country]);
     }
 
     /**
@@ -92,7 +95,16 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:countries'
+        ]);
+        
+        $country = Country::find($id);
+        $country->name = $request->input('name');
+        $country->territory = $request->input('territory');
+        $country->save();
+        
+        return redirect()->route('countries.index')->with('msg', 'Country '.$request->name.' was updated');
     }
 
     /**

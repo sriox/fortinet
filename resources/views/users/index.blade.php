@@ -34,7 +34,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ is_null($user->deleted_at) ? 'Active': 'Inactive' }}</td>
-                        <td><a href="#">Edit</a></td>
+                        <td><a href="{{ route('users.edit', ['id' => $user->id]) }}">Edit</a></td>
                         <td><a href="{{ route('users.delete', ['id' => $user->id]) }}">@if($user->trashed()) Activate @else Delete @endif</a></td>
                     </tr>
                     @endforeach

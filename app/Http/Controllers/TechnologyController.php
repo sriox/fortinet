@@ -52,11 +52,13 @@ class TechnologyController extends Controller
         $technology = Technology::withTrashed()->find($id);
         if($technology->trashed()){
             $technology->restore();
+            $action = 'activated';
         }else{
             $technology->delete();
+            $action = 'inactivated';
         }
         
-        return redirect()->back();
+        return redirect()->back()->with('msg', 'The technology '.$technology->name.' was '.$action);
     }
 
     /**
@@ -78,7 +80,8 @@ class TechnologyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $technology = Technology::find($id);
+        return view('technology.edit', ['technology' => $technology]);
     }
 
     /**
@@ -90,7 +93,15 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:technologies'
+        ]);
+        
+        $technology = Technology::find($id);
+        $technology->name = $request->input('name');
+        $technology->save();
+        
+        return redirect()->route('technologies.index')->with('msg', 'Technology '.$request->name.' was updated');
     }
 
     /**

@@ -66,7 +66,8 @@ class ActivityTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activityType = ActivityType::find($id);
+        return view('activityType.edit', ['activityType' => $activityType]);
     }
     
     public function delete($id)
@@ -74,11 +75,13 @@ class ActivityTypeController extends Controller
         $type = ActivityType::withTrashed()->find($id);
         if($type->trashed()){
             $type->restore();
+            $action = 'activated';
         }else{
             $type->delete();
+            $action = 'inactivated';
         }
         
-        return redirect()->back();
+        return redirect()->back()->with('msg', 'The activity type '.$type->name.' was '.$action);
     }
 
     /**
@@ -90,7 +93,15 @@ class ActivityTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:activity_types'
+        ]);
+        
+        $activityType = ActivityType::find($id);
+        $activityType->name = $request->input('name');
+        $activityType->save();
+        
+        return redirect()->route('activityTypes.index')->with('msg', 'Activity Type '.$request->name.' was updated');
     }
 
     /**
