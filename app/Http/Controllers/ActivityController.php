@@ -158,7 +158,7 @@ class ActivityController extends Controller
             'technology' => 'required',
             'se' => 'required',
             'description' => 'required',
-            'timeUsed' => 'required|integer'
+            'timeUsed' => 'required|numeric'
         ]);
         
         $activity = Activity::find($id);
@@ -189,6 +189,9 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $activity = Activity::find($id);
+        $activity->delete();
+        
+        return redirect()->back()->with('msg', 'The activity was deleted');
     }
 }

@@ -232,7 +232,7 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'activities.update'
         ]);     
         
-        Route::post('destroy/{id}', [
+        Route::get('destroy/{id}', [
             'uses' => 'ActivityController@destroy',
             'as' => 'activities.destroy'
         ]);
