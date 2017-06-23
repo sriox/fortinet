@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-12">
            <div id="table_canvas">
-            <table class="table table-bordered">
+            <table class="table table-bordered stripe">
                 <thead>
                     <tr>
                         <th>Set Member</th>
@@ -38,7 +38,6 @@
                         <th>Customer</th>
                         <th>Bried Description</th>
                         <th>Activity Executed</th>
-                        <th>Time Used (Minutes)</th>
                         <th>Time Used (Hours)</th>
                         <th>Actions</th>
                         <th>&nbsp;</th>
@@ -59,7 +58,6 @@
                         <td>{{ $activity->description }}</td>
                         <td>{{ $activity->activity_executed }}</td>
                         <td>{{ $activity->time_used }}</td>
-                        <td>{{ $activity->time_used / 60 }}</td>
                         <td><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></td>
                         <td><a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a></td>
                     </tr>

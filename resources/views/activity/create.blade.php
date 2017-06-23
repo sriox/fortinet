@@ -104,9 +104,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="timeUsed" class="control-label col-md-4">Time Used (Minutes)</label>
+                        <label for="timeUsed" class="control-label col-md-4">Time Used (hours)</label>
                         <div class="col-md-6">
-                            <input type="number" name="timeUsed" id="timeUsed" class="form-control">
+                            <input type="number" step="0.01" name="timeUsed" id="timeUsed" class="form-control" ><small><strong>(.) for decimals</strong></small>
                         </div>
                     </div>
                 </div>

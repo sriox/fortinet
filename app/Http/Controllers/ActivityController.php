@@ -64,7 +64,10 @@ class ActivityController extends Controller
             'technology' => 'required',
             'se' => 'required',
             'description' => 'required',
-            'timeUsed' => 'required|integer'
+            'timeUsed' => 'required|integer',
+            'customer' => 'max:255',
+            'smartTicket' => 'max:255',
+            'timeUsed' => 'numeric'
         ]);
         
         Activity::create([
