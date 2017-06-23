@@ -33,7 +33,7 @@
         <ul class="sidebar-menu">
             <li class="header">TRACKING OPTIONS</li>
             <!-- Optionally, you can add icons to the links -->
-            <li><a href="{{ route('activities.index') }}">Activities</a></li>
+            <li><a href="{{ route('activities.index') }}">My Activities</a></li>
             <li><a href="{{ route('activities.all') }}">All Activities</a></li>
         </ul>
         <ul class="sidebar-menu">
