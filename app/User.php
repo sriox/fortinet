@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Activity;
+use App\Profile;
 
 class User extends Authenticatable
 {
@@ -21,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'profile_id'
     ];
 
     /**
@@ -41,5 +42,10 @@ class User extends Authenticatable
     public function socialProviders()
     {
         return $this->hasMany('App\SocialProvider');
+    }
+    
+    public function profile()
+    {
+        return $this->belongsTo('App\Profile');
     }
 }

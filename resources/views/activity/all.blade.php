@@ -60,8 +60,8 @@
                         <td>{{ $activity->activity_executed }}</td>
                         <td>{{ $activity->time_used }}</td>
                         <td>{{ $activity->time_used / 60 }}</td>
-                        <td>@if($activity->user->id == Auth::id())<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}">Edit</a>@endif</td>
-                        <td>@if($activity->user->id == Auth::id())<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a>@endif</td>
+                        <td>@if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}">Edit</a>@endif</td>
+                        <td>@if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a>@endif</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -43,12 +43,12 @@
             <li><a href="#">Export Data</a></li>
         </ul>
         <ul class="sidebar-menu">
-            <li class="header">ADMIN OPTIONS</li>            
-            <li><a href="{{ route('users.index') }}">Admin Users</a></li>
-            <li><a href="{{ route('countries.index') }}">Admin Countries</a></li>
-            <li><a href="{{ route('activityTypes.index') }}">Admin Activity Types</a></li>
-            <li><a href="{{ route('technologies.index') }}">Admin Technologies</a></li>
-            <li><a href="{{ route('se.index') }}">Admin Se</a></li>
+            <li class="header">MASTER DATA</li>            
+            <li><a href="{{ route('users.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin Users': 'Users' }}</a></li>
+            <li><a href="{{ route('countries.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin Countries': 'Countries' }}</a></li>
+            <li><a href="{{ route('activityTypes.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin Activity Types': 'Activity Types' }}</a></li>
+            <li><a href="{{ route('technologies.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin Technologies': 'Technologies' }}</a></li>
+            <li><a href="{{ route('se.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin SE': 'SE' }}</a></li>
         </ul>
         <!-- /.sidebar-menu -->
 

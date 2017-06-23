@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Profile;
 
 class UsersController extends Controller
 {
@@ -14,8 +15,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::withTrashed()->get()->sortBy('name');
-        return view('users.index', ['users' => $users]);
+        $users = User::withTrashed()->with('profile')->get()->sortBy('name');
+        $profiles = Profile::All();
+        return view('users.index', ['users' => $users, 'profiles' => $profiles]);
     }
 
     /**
@@ -38,13 +40,15 @@ class UsersController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:users'
+            'email' => 'required|unique:users',
+            'profile' => 'required'
         ]);
         
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('email'))
+            'password' => bcrypt($request->input('email')),
+            'profile' => $request->input('profile')
         ]);
         
         return redirect()->route('users.index')->with('msg', 'User Created');
@@ -70,7 +74,19 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('users.edit', ['user' => $user]);
+        $profiles = Profile::all();
+        $adminProfile = $profiles->where('key', '=', 'ADMIN')->first();
+        
+        
+        
+        if($user->profile->key == 'ADMIN'){
+            $adminsCount = User::where('profile_id', '=', $adminProfile->id)->count();
+            $profileChangeable = $adminsCount > 1;
+        }else{
+            $profileChangeable = true;
+        }
+        
+        return view('users.edit', ['user' => $user, 'profiles' => $profiles, 'profileChangeable' => $profileChangeable]);
     }
 
     /**
@@ -84,13 +100,17 @@ class UsersController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:users,email,'.$id
+            'email' => 'required|unique:users,email,'.$id,
+            'profile' => 'required'
         ]);
+        
+        $profile = Profile::find($request->input('profile'));
         
         $user = User::find($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->save();
+        
+        $profile->users()->save($user);
         
         return redirect()->route('users.index')->with('msg', 'User '.$request->name.' was updated');
     }

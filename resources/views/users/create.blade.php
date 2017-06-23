@@ -24,6 +24,17 @@
                     <div class="form-group">
                         <label for="email" class="control-label col-md-4">Email</label>
                         <div class="col-md-6"><input type="text" class="form-control" name="email" id="email" required></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile" class="control-label col-md-4">Profile</label>
+                        <div class="col-md-6">
+                            <select name="profile" id="profile" class="form-control" required>
+                                <option value="">-- Select --</option>
+                                @foreach($profiles as $profile)
+                                <option value="{{ $profile->id }}">{{ $profile->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>                            
                 </div>
                 <div class="panel-footer">

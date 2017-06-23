@@ -12,12 +12,15 @@
    @if(Session::has('msg'))
    <div class="alert alert-success">{{ Session::get('msg') }}</div>
    @endif
+   @if(Auth::user()->profile->key == 'ADMIN')
     <div class="row">
         <div class="col-md-3"><a href="{{ route('technologies.create') }}" class="btn btn-primary">Add Technology</a></div>
     </div>
+    @endif
     <br>
     <div class="row">
         <div class="col-md-12">
+           @if(Auth::user()->profile->key == 'ADMIN')
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -38,6 +41,24 @@
                     @endforeach
                 </tbody>
             </table>
+            @else
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name ({{ count($technologies) }})</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($technologies as $technology)
+                    <tr>
+                        <td>{{ $technology->name }}</td>
+                        <td>{{ is_null($technology->deleted_at) ? 'Active': 'Inactive' }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
         </div>
     </div>
 </div>
