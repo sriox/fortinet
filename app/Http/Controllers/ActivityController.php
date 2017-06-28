@@ -165,7 +165,7 @@ class ActivityController extends Controller
             'se' => 'required',
             'description' => 'required',
             'timeUsed' => 'required|numeric',
-            'carrier_id' => 'required'
+            'carrier' => 'required'
         ]);
         
         $activity = Activity::find($id);
@@ -181,7 +181,7 @@ class ActivityController extends Controller
         $activity->description = $request->input('description');
         $activity->activity_executed = $request->input('activityExecuted');
         $activity->time_used = $request->input('timeUsed');
-        $activity->carrier_id = $request->input('carrier_id');
+        $activity->carrier_id = $request->input('carrier');
         
         $activity->save();
         

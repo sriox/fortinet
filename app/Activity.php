@@ -46,4 +46,9 @@ class Activity extends Model
     {
         return $this->belongsTo('App\Carrier')->withTrashed();
     }
+    
+    public function getBriefDescription()
+    {
+        return implode(' ', array_slice(explode(' ', $this->description), 0, 10));
+    }
 }
