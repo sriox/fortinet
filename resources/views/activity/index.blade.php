@@ -54,7 +54,7 @@
                         <td>{{ $activity->technology->name }}</td>
                         <td>{{ $activity->smart_ticket }}</td>
                         <td>{{ $activity->customer }}</td>
-                        <td>{{ $activity->getBriefDescription() }}</td>
+                        <td><a href="{{ route('activities.show', ['id' => $activity->id]) }}">{{ $activity->getBriefDescription() }}</a></td>
                         <td>{{ $activity->activity_executed }}</td>
                         <td>{{ $activity->time_used }}</td>
                         <td><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></td>

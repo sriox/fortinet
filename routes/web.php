@@ -267,6 +267,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('destroy/{id}', [
             'uses' => 'ActivityController@destroy',
             'as' => 'activities.destroy'
+        ]);     
+        
+        Route::get('show/{id}', [
+            'uses' => 'ActivityController@show',
+            'as' => 'activities.show'
         ]);
     });
 });
