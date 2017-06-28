@@ -9,7 +9,7 @@
 @section('content')
 <div class="content-header">
     <header>
-        <h1>My Activities</h1>
+        <h1>My Activities <small>Week hours: ({{ $usedHours }}/{{ $weekHours }})</small></h1>
     </header>
 </div>
 <div class="content body">
