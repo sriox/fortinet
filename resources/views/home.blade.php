@@ -9,7 +9,7 @@
         <h1>Dashboard</h1>
     </header>
 </div>
-<div class="content body">
+<div class="content body canvas">
    <input type="hidden" name="data" id="data" value="{{ json_encode($data) }}">
    <input type="hidden" name="technologies" id="technologies" value="{{ json_encode($technologies) }}">
     <div class="row">

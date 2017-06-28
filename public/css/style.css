@@ -19,3 +19,7 @@ body {
 .control-label{
     font-weight: bold;
 }
+
+.canvas{
+    background-color: white;
+}
