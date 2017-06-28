@@ -49,6 +49,7 @@
             <li><a href="{{ route('activityTypes.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin Activity Types': 'Activity Types' }}</a></li>
             <li><a href="{{ route('technologies.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin Technologies': 'Technologies' }}</a></li>
             <li><a href="{{ route('se.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin SE': 'SE' }}</a></li>
+            <li><a href="{{ route('carriers.index') }}">{{ Auth::user()->profile->key == 'ADMIN' ? 'Admin Carriers': 'Carriers' }}</a></li>
         </ul>
         <!-- /.sidebar-menu -->
 

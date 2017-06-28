@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="date" class="control-label col-md-4">Date <span class="required-field">*</span></label>
+                        <label for="date" class="control-label col-md-4">Start Date <span class="required-field">*</span></label>
                         <div class="col-md-6">
                             <input type="text" name="date" id="date" class="form-control" value="{{ $activity->date }}" required>
                         </div>
@@ -72,9 +72,18 @@
                         <label for="se" class="control-label col-md-4">SE <span class="required-field">*</span></label>
                         <div class="col-md-6">
                             <select name="se" id="se" class="form-control" required>
-                                <option value="">-- Select --</option>
                                 @foreach($ses as $se)
                                 <option value="{{ $se->id }}" {{ $se->id == $activity->se->id ? 'selected': '' }} >{{ $se->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="se" class="control-label col-md-4">Carrier</label>
+                        <div class="col-md-6">
+                            <select name="carrier" id="carrier" class="form-control" required>
+                                @foreach($ses as $carrier)
+                                <option value="{{ $carrier->id }}" {{ $se->id == $activity->carrier->id ? 'selected': '' }} >{{ $carrier->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -97,12 +106,7 @@
                             <textarea name="activityExecuted" id="activityExecuted" cols="30" rows="5" class="form-control">{{ $activity->activity_executed }}</textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="executionDate" class="control-label col-md-4">Execution Date</label>
-                        <div class="col-md-6">
-                            <input type="text" name="executionDate" id="executionDate" class="form-control" value="{{ $activity->execution_date }}">
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="timeUsed" class="control-label col-md-4">Time Used (Hours)</label>
                         <div class="col-md-6">

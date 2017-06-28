@@ -1,12 +1,12 @@
 @extends('layouts.app') @section('content')
 <div class="content body">
   
-   <form action="{{ route('technologies.store') }}" method="post" class="form-horizontal">
+   <form action="{{ route('carriers.store') }}" method="post" class="form-horizontal">
    {{ csrf_field() }}
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">New Technology</div>
+                <div class="panel-heading">New Carrier</div>
                 <div class="panel-body">
                    @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -18,9 +18,9 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="name" class="control-label col-md-4">Technology</label>
+                        <label for="name" class="control-label col-md-4">Carrier</label>
                         <div class="col-md-6"><input type="text" class="form-control" name="name" id="name"></div>
-                    </div>                            
+                    </div>                          
                 </div>
                 <div class="panel-footer">
                     <div class="form-group">

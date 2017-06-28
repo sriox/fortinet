@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="date" class="control-label col-md-4">Date <span class="required-field">*</span></label>
+                        <label for="date" class="control-label col-md-4">Start Date <span class="required-field">*</span></label>
                         <div class="col-md-6">
                             <input type="text" name="date" id="date" class="form-control" required>
                         </div>
@@ -80,6 +80,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="carrier" class="control-label col-md-4">Carrier</label>
+                        <div class="col-md-6">
+                            <select name="carrier" id="carrier" class="form-control" required>                                
+                                @foreach($carriers as $carrier)
+                                <option value="{{ $carrier->id }}" {{ $carrier->name == 'N/A'? 'selected': '' }}>{{ $carrier->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="customer" class="control-label col-md-4">Customer</label>
                         <div class="col-md-6">
                             <input type="text" name="customer" id="customer" class="form-control">
@@ -95,12 +105,6 @@
                         <label for="activityExecuted" class="control-label col-md-4">Activity Executed</label>
                         <div class="col-md-6">
                             <textarea name="activityExecuted" id="activityExecuted" cols="30" rows="5" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="executionDate" class="control-label col-md-4">Execution Date</label>
-                        <div class="col-md-6">
-                            <input type="text" name="executionDate" id="executionDate" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

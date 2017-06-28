@@ -1,5 +1,5 @@
 @extends('layouts.app') @section('content')
-<div class="container">
+<div class="content body">
 
     <form action="{{ route('technologies.update', ['id' => $technology->id]) }}" method="post" class="form-horizontal">
         <input type="hidden" name="id" value="{{ $technology->id }}"> {{ csrf_field() }}

@@ -19,7 +19,8 @@ class Activity extends Model
         'description',
         'activity_executed',
         'execution_date',
-        'time_used'
+        'time_used',
+        'carrier_id'
     ];
     
     public function user(){
@@ -39,5 +40,10 @@ class Activity extends Model
     public function se()
     {
         return $this->belongsTo('App\Se')->withTrashed();
+    }
+    
+    public function carrier()
+    {
+        return $this->belongsTo('App\Carrier')->withTrashed();
     }
 }

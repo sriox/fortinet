@@ -200,6 +200,38 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'se.update'
         ]); 
     });
+    
+    Route::group(['prefix' => 'carriers'], function(){
+        Route::get('/', [
+            'uses' => 'CarrierController@index',
+            'as' => 'carriers.index'
+        ]);
+
+        Route::get('create', [
+            'uses' => 'CarrierController@create',
+            'as' => 'carriers.create'
+        ]);
+
+        Route::post('store', [
+            'uses' => 'CarrierController@store',
+            'as' => 'carriers.store'
+        ]);
+
+        Route::get('delete/{id}', [
+            'uses' => 'CarrierController@delete',
+            'as' => 'carriers.delete'
+        ]);
+        
+        Route::get('edit/{id}', [
+            'uses' => 'CarrierController@edit',
+            'as' => 'carriers.edit'
+        ]);  
+
+        Route::post('update/{id}', [
+            'uses' => 'CarrierController@update',
+            'as' => 'carriers.update'
+        ]); 
+    });
 
     Route::group(['prefix' => 'activities'], function(){
         Route::get('/', [

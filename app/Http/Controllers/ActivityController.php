@@ -8,6 +8,7 @@ use App\Country;
 use App\ActivityType;
 use App\Se;
 use App\Technology;
+use App\Carrier;
 use Auth;
 
 class ActivityController extends Controller
@@ -40,12 +41,14 @@ class ActivityController extends Controller
         $ses = Se::all()->sortBy('name');
         $technologies = Technology::whereNull('deleted_at')->get()->sortBy('name');
         $activityTypes = ActivityType::all()->sortBy('name');
+        $carriers = Carrier::all()->sortBy('name');
         
         return view('activity.create', [
             'countries' => $countries,
             'ses' => $ses,
             'technologies' => $technologies,
-            'activityTypes' => $activityTypes
+            'activityTypes' => $activityTypes,
+            'carriers' => $carriers
         ]);
     }
 
@@ -67,7 +70,8 @@ class ActivityController extends Controller
             'timeUsed' => 'required|integer',
             'customer' => 'max:255',
             'smartTicket' => 'max:255',
-            'timeUsed' => 'numeric'
+            'timeUsed' => 'numeric',
+            'carrier' => 'required'
         ]);
         
         Activity::create([
@@ -82,8 +86,8 @@ class ActivityController extends Controller
             'customer' => $request->input('customer'),
             'description' => $request->input('description'),
             'activity_executed' => $request->input('activityExecuted'),
-            'execution_date' => $request->input('executionDate'),
-            'time_used' => $request->input('timeUsed')
+            'time_used' => $request->input('timeUsed'),
+            'carrier_id' => $request->input('carrier')
         ]);
         
         return redirect()->route('activities.index');
@@ -131,6 +135,7 @@ class ActivityController extends Controller
         $ses = Se::all()->sortBy('name');
         $technologies = Technology::whereNull('deleted_at')->get()->sortBy('name');
         $activityTypes = ActivityType::all()->sortBy('name');
+        $carriers = Carrier::all()->sortBy('name');
         
         return view('activity.edit', [
             'activity' => $activity,
@@ -138,6 +143,7 @@ class ActivityController extends Controller
             'ses' => $ses,
             'technologies' => $technologies,
             'activityTypes' => $activityTypes,
+            'carriers' => $carriers,
             'page' => $page
         ]);
     }
@@ -158,7 +164,8 @@ class ActivityController extends Controller
             'technology' => 'required',
             'se' => 'required',
             'description' => 'required',
-            'timeUsed' => 'required|numeric'
+            'timeUsed' => 'required|numeric',
+            'carrier_id' => 'required'
         ]);
         
         $activity = Activity::find($id);
@@ -173,8 +180,8 @@ class ActivityController extends Controller
         $activity->customer = $request->input('customer');
         $activity->description = $request->input('description');
         $activity->activity_executed = $request->input('activityExecuted');
-        $activity->execution_date = $request->input('executionDate');
         $activity->time_used = $request->input('timeUsed');
+        $activity->carrier_id = $request->input('carrier_id');
         
         $activity->save();
         
