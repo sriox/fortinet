@@ -4,8 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/activity-index.css') }}">
 
 <script src="{{ asset('plugins/perfectscrollbar/perfect-scrollbar.jquery.min.js') }}"></script>
-<script src="{{ asset('js/tables.js') }}"></script>
-<script src="{{ asset('js/activity-index.js') }}"></script>
+<script src="{{ asset('js/activity-all.js') }}"></script>
 @endsection
 @section('content')
 <div class="content-header">
@@ -24,7 +23,7 @@
     <div class="row">
         <div class="col-md-12">
            <div id="table_canvas">
-            <table class="table table-bordered stripe">
+            <table class="table table-bordered stripe" id="table">
                 <thead>
                     <tr>
                         <th>Set Member</th>
@@ -36,7 +35,7 @@
                         <th>Technology</th>
                         <th>Smart Ticket</th>
                         <th>Customer</th>
-                        <th>Bried Description</th>
+                        <th>Brief Description</th>
                         <th>Activity Executed</th>
                         <th>Time Used (Hours)</th>
                         <th>Actions</th>
@@ -55,7 +54,7 @@
                         <td>{{ $activity->technology->name }}</td>
                         <td>{{ $activity->smart_ticket }}</td>
                         <td>{{ $activity->customer }}</td>
-                        <td>{{ $activity->description }}</td>
+                        <td>{{ $activity->getBriefDescription() }}</td>
                         <td>{{ $activity->activity_executed }}</td>
                         <td>{{ $activity->time_used }}</td>
                         <td>@if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}">Edit</a>@endif</td>
