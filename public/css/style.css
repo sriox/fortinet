@@ -23,3 +23,9 @@ body {
 .canvas{
     background-color: white;
 }
+
+.table-canvas{
+    position: relative;
+    height: 380px;
+    max-height: 380px;
+}

@@ -22,7 +22,7 @@
     <br>
     <div class="row">
         <div class="col-md-12">
-           <div id="table_canvas">
+           <div id="table_canvas" class="table-canvas">
             <table class="table table-bordered stripe" id="table">
                 <thead>
                     <tr>
