@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Activity;
 
 class HomeController extends Controller
 {
@@ -22,18 +23,35 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::select('SELECT u.name, CONVERT(SUM(a.time_used), signed) AS time_used
-                            FROM activities a, users u
-                            WHERE u.id = a.user_id
-                            GROUP BY u.name');
+        $year = $request->has('y')? $request->input('y'): date("Y");
+        $quarter = $request->has('q')? $request->input('q'): ceil(date('n', time()) / 3);
+        $isCarrier = $request->has('c')? $request->input('c'): 0;
         
-        $technologies = DB::select('SELECT t.name, CONVERT(SUM(a.time_used), signed) AS time_used
-                            FROM activities a, technologies t
-                            WHERE t.id = a.technology_id
-                            GROUP BY t.name');
-        
-        return view('home', ['data' => $data, 'technologies' => $technologies]);
+        $userData = Activity::getQuarterTimeByUser($year, $quarter, $isCarrier);
+        $activityTypeData = Activity::getQuarterTimeByActivityType($year, $quarter, $isCarrier);
+        $territoryData = Activity::getQuarterTimeByTerritory($year, $quarter, $isCarrier);
+        $countryData = Activity::getQuarterTimeByCountry($year, $quarter, $isCarrier);
+        $technologyData = Activity::getQuarterTimeByTechnology($year, $quarter, $isCarrier);
+        $years = $this->getValidYears();
+        //dd($years);
+        return view('home', [
+            'userData' => $userData, 
+            'activityTypeData' => $activityTypeData,
+            'territoryData' => $territoryData,
+            'countryData' => $countryData,
+            'technologyData' => $technologyData,
+            'year' => $year,
+            'quarter' => $quarter,
+            'years' => $years,
+            'isCarrier' => $isCarrier
+        ]);
+    }
+    
+    private function getValidYears()
+    {
+        return DB::select('SELECT DISTINCT YEAR(DATE) as year
+                            FROM activities');
     }
 }

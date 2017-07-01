@@ -1,5 +1,5 @@
 @extends('layouts.app') @section('content')
-<div class="container">
+<div class="content body">
   
    <form action="{{ route('activities.store') }}" method="post" class="form-horizontal">
    {{ csrf_field() }}
