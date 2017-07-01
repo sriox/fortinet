@@ -84,7 +84,7 @@
                         <div class="col-md-6">
                             <select name="carrier" id="carrier" class="form-control" required>                                
                                 @foreach($carriers as $carrier)
-                                <option value="{{ $carrier->id }}" {{ $carrier->name == 'N/A'? 'selected': '' }}>{{ $carrier->name }}</option>
+                                <option value="{{ $carrier->id }}" {{ $carrier->name == 'None'? 'selected': '' }}>{{ $carrier->name }}</option>
                                 @endforeach
                             </select>
                         </div>
