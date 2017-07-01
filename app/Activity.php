@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Activity extends Model
 {
@@ -50,5 +51,82 @@ class Activity extends Model
     public function getBriefDescription()
     {
         return implode(' ', array_slice(explode(' ', $this->description), 0, 10));
+    }
+    
+    static public function getQuarterTimeByTerritory($year, $quarter, $is_carrier = 0)
+    {
+        $sql = 'SELECT c.territory, CONVERT(SUM(time_used), signed) AS time_used
+                FROM activities a, countries c, users u
+                WHERE c.id = a.country_id 
+                AND a.quarter = '.$quarter.' 
+                AND YEAR(a.date) = '.$year.' 
+                AND u.id = a.user_id 
+                AND u.is_carrier = '.$is_carrier.'
+                GROUP BY c.territory';
+        
+        $data = DB::select($sql);
+        
+        return $data;
+    }
+    
+    static public function getQuarterTimeByTechnology($year, $quarter, $is_carrier = 0)
+    {
+        $sql = 'SELECT c.territory, CONVERT(SUM(time_used), signed) AS time_used
+                FROM activities a, countries c, users u
+                WHERE c.id = a.country_id 
+                AND a.quarter = '.$quarter.' 
+                AND YEAR(a.date) = '.$year.' 
+                AND u.id = a.user_id 
+                AND u.is_carrier = '.$is_carrier.'
+                GROUP BY c.territory';
+        
+        $data = DB::select($sql);
+        
+        return $data;
+    }
+    
+    static public function getQuarterTimeByCountry($year, $quarter, $is_carrier = 0)
+    {
+        $sql = 'SELECT c.name, CONVERT(SUM(time_used), signed) AS time_used
+                FROM activities a, countries c, users u
+                WHERE c.id = a.country_id AND a.quarter = '.$quarter.' 
+                AND YEAR(a.date) = '.$year.' 
+                AND u.id = a.user_id 
+                AND u.is_carrier = '.$is_carrier.'
+                GROUP BY c.name';
+        
+        $data = DB::select($sql);
+        
+        return $data;
+    }
+    
+    static public function getQuarterTimeByActivityType($year, $quarter, $is_carrier = 0)
+    {
+        $sql = 'SELECT t.name, CONVERT(SUM(time_used), signed) AS time_used
+                FROM activities a, activity_types t, users u
+                WHERE t.id = a.activity_type_id 
+                AND a.quarter = '.$quarter.' 
+                AND YEAR(a.date) = '.$year.' 
+                AND u.id = a.user_id 
+                AND u.is_carrier = '.$is_carrier.'
+                GROUP BY t.name';
+        
+        $data = DB::select($sql);
+        
+        return $data;
+    }
+    
+    static public function getQuarterTimeByUser($year, $quarter, $is_carrier = 0)
+    {
+        $sql = 'SELECT u.name, CONVERT(SUM(time_used), signed) AS time_used
+                FROM activities a, users u
+                WHERE a.quarter = '.$quarter.' 
+                AND YEAR(a.date) = '.$year.' 
+                AND u.id = a.user_id AND u.is_carrier = '.$is_carrier.'
+                GROUP BY u.name';
+        
+        $data = DB::select($sql);
+        
+        return $data;
     }
 }
