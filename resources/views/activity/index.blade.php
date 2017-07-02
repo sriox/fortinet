@@ -25,39 +25,39 @@
             <table class="table table-bordered stripe" id="table">
                 <thead>
                     <tr>
-                        <th>Member</th>
-                        <th>Activity</th>
-                        <th>Date</th>
-                        <th>Quarter</th>
-                        <th>Country</th>
-                        <th>Territory</th>
-                        <th>Technology</th>
-                        <th>Smart Ticket</th>
-                        <th>Customer</th>
-                        <th>Desc</th>
-                        <th>Activity Executed</th>
-                        <th>Time (H)</th>
-                        <th>Actions</th>
-                        <th>&nbsp;</th>
+                        <th><span style="white-space: nowrap">Member</span></th>
+                        <th><span style="white-space: nowrap">Activity</span></th>
+                        <th><span style="white-space: nowrap">Desc</span></th>
+                        <th><span style="white-space: nowrap">Date</span></th>
+                        <th><span style="white-space: nowrap">Quarter</span></th>
+                        <th><span style="white-space: nowrap">Country</span></th>
+                        <th><span style="white-space: nowrap">Territory</span></th>
+                        <th><span style="white-space: nowrap">Technology</span></th>
+                        <th><span style="white-space: nowrap">Smart Ticket</span></th>
+                        <th><span style="white-space: nowrap">Customer</span></th>
+                        <th><span style="white-space: nowrap">Activity Executed</span></th>
+                        <th><span style="white-space: nowrap">Time (H)</span></th>
+                        <th><span style="white-space: nowrap">Actions</span></th>
+                        <th><span style="white-space: nowrap">&nbsp;</span></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($activities as $activity)
                     <tr>
-                        <td>{{ $activity->user->name }}</td>
-                        <td>{{ $activity->activityType->name }}</td>
-                        <td>{{ $activity->date }}</td>
-                        <td>{{ $activity->quarter }}</td>
-                        <td>{{ $activity->country->name }}</td>
-                        <td>{{ $activity->country->territory }}</td>
-                        <td>{{ $activity->technology->name }}</td>
-                        <td>{{ $activity->smart_ticket }}</td>
-                        <td>{{ $activity->customer }}</td>
-                        <td><a href="{{ route('activities.show', ['id' => $activity->id]) }}">{{ $activity->getBriefDescription() }}</a></td>
-                        <td>{{ $activity->activity_executed }}</td>
-                        <td>{{ $activity->time_used }}</td>
-                        <td><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></td>
-                        <td><a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a></td>
+                        <td><span style="white-space: nowrap">{{ $activity->user->name }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->activityType->name }}</span></td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}">{{ $activity->getBriefDescription() }}</a></span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->date }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->quarter }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->country->name }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->country->territory }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->technology->name }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->smart_ticket }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->customer }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->activity_executed }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></span></td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a></span></td>
                     </tr>
                     @endforeach
                 </tbody>
