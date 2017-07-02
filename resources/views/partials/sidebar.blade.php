@@ -40,7 +40,6 @@
             <li class="header">REPORTING OPTIONS</li>
             <!-- Optionally, you can add icons to the links -->
             <li><a href="{{ route('home') }}">Dashboard</a></li>
-            <li><a href="#">Export Data</a></li>
         </ul>
         <ul class="sidebar-menu">
             <li class="header">MASTER DATA</li>            

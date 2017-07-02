@@ -9,7 +9,10 @@
 @section('content')
 <div class="content-header">
     <header>
-        <h1>All Activities</h1>
+       <div class="row">
+           <div class="col-md-4"><h1>All Activities</h1></div>
+           <div class="col-md-8"><a href="{{ route('activities.create') }}" class="btn btn-primary pull-right">Add Activity</a></div>
+       </div>
     </header>
 </div>
 <div class="content body">
@@ -17,16 +20,12 @@
    <div class="alert alert-success">{{ Session::get('msg') }}</div>
    @endif
     <div class="row">
-        <div class="col-md-3"><a href="{{ route('activities.create') }}" class="btn btn-primary">Add Activity</a></div>
-    </div>
-    <br>
-    <div class="row">
         <div class="col-md-12">
            <div id="table_canvas" class="table-canvas">
             <table class="table table-bordered stripe" id="table">
                 <thead>
                     <tr>
-                        <th>Set Member</th>
+                        <th>Member</th>
                         <th>Activity</th>
                         <th>Date</th>
                         <th>Quarter</th>
@@ -35,9 +34,9 @@
                         <th>Technology</th>
                         <th>Smart Ticket</th>
                         <th>Customer</th>
-                        <th>Brief Description</th>
+                        <th>Desc</th>
                         <th>Activity Executed</th>
-                        <th>Time Used (Hours)</th>
+                        <th>Time (H)</th>
                         <th>Actions</th>
                         <th>&nbsp;</th>
                     </tr>
