@@ -14,6 +14,7 @@
             }
         ],
         scrollY: 350,
-        scrollX: true
+        scrollX: true,
+        pageLength: 50
     });
 })();
