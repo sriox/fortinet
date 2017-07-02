@@ -1,5 +1,5 @@
 (function(){
-    $('#table_canvas').perfectScrollbar();
+    //$('#table_canvas').perfectScrollbar();
     
     $('#table').DataTable({
         paging: true,
@@ -8,6 +8,8 @@
                 "targets": [ 10 ],
                 "visible": false            
             }
-        ]
+        ],
+        scrollY: 350,
+        scrollX: true
     });
 })();
