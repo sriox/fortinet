@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use App\Activity;
 use App\Profile;
 
@@ -47,5 +48,12 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->belongsTo('App\Profile');
+    }
+    
+    public function getCurrentWeekHours()
+    {
+        return DB::select('SELECT IFNULL(SUM(time_used), 0) as hours
+                                FROM activities
+                                WHERE user_id = '.$this->id.' AND DATE >= CURDATE() - INTERVAL (WEEKDAY(CURDATE())) DAY AND DATE <= CURDATE() - INTERVAL (WEEKDAY(CURDATE())-6) DAY')[0];
     }
 }

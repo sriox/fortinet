@@ -71,14 +71,14 @@ class Activity extends Model
     
     static public function getQuarterTimeByTechnology($year, $quarter, $is_carrier = 0)
     {
-        $sql = 'SELECT c.territory, CONVERT(SUM(time_used), signed) AS time_used
-                FROM activities a, countries c, users u
-                WHERE c.id = a.country_id 
+        $sql = 'SELECT t.name, CONVERT(SUM(time_used), signed) AS time_used
+                FROM activities a, technologies t, users u
+                WHERE t.id = a.technology_id 
                 AND a.quarter = '.$quarter.' 
                 AND YEAR(a.date) = '.$year.' 
                 AND u.id = a.user_id 
                 AND u.is_carrier = '.$is_carrier.'
-                GROUP BY c.territory';
+                GROUP BY t.name';
         
         $data = DB::select($sql);
         
