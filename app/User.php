@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Profile');
     }
     
-    public function getCurrentWeekHours()
+    public function getWeekUsedHours()
     {
         return DB::select('SELECT IFNULL(SUM(time_used), 0) as hours
                                 FROM activities

@@ -27,7 +27,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $profiles = Profile::all()->sortBy('name');
+        return view('users.create', ['profiles' => $profiles]);
     }
 
     /**
@@ -48,7 +49,7 @@ class UsersController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('email')),
-            'profile' => $request->input('profile')
+            'profile_id' => $request->input('profile')
         ]);
         
         return redirect()->route('users.index')->with('msg', 'User Created');
