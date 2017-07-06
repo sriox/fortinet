@@ -22,12 +22,11 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $usedHours = Auth::user()->getCurrentWeekHours();
-        
+        $usedHours = Auth::user()->getWeekUsedHours();
         $weekHours = Config::where('key', '=', 'WEEK_HOURS')->first();
         
-        $activities = Activity::where('user_id', '=', Auth::id())->get()->sortByDesc('date');
         
+        $activities = Activity::where('user_id', '=', Auth::id())->get()->sortByDesc('date');
         return view('activity.index', ['activities' => $activities, 'usedHours' => $usedHours->hours, 'weekHours' => $weekHours->value]);
     }
     
