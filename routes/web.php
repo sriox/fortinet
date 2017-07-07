@@ -22,7 +22,7 @@ Route::get('login/callback', [
 ]);
 
 Route::get('login', [
-    'uses' => 'Auth\LoginController@redirectToProvider',
+    'uses' => 'Auth\LoginController@showLoginForm',
     'as' => 'login'
 ]);
 Route::get('loginm', [
