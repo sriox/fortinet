@@ -82,8 +82,8 @@
                         <label for="se" class="control-label col-md-4">Carrier</label>
                         <div class="col-md-6">
                             <select name="carrier" id="carrier" class="form-control" required>
-                                @foreach($ses as $carrier)
-                                <option value="{{ $carrier->id }}" {{ $se->id == $activity->carrier->id ? 'selected': '' }} >{{ $carrier->name }}</option>
+                                @foreach($carriers as $carrier)
+                                <option value="{{ $carrier->id }}" {{ $carrier->id == $activity->carrier->id ? 'selected': '' }} >{{ $carrier->name }}</option>
                                 @endforeach
                             </select>
                         </div>
