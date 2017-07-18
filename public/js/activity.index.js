@@ -1,6 +1,5 @@
 (function(){
-    //$('#table_canvas').perfectScrollbar();
-    
+
     $('#table').DataTable({
         paging: true,
         "columnDefs": [
@@ -17,16 +16,19 @@
         scrollX: true,
         pageLength: 50,
         initComplete: function(){
-            this.api().columns([0, 1, 4, 5, 7]).every(function(){
+            this.api().columns([0, 1, 4, 5, 7]).every(function(index){
                 var column = this;
-                var select = $('<select><option value="">Show All</option></select>')
+                // $('<br />').appendTo(column.header());
+                var select = $('<select id="filter_' + index + '"><option value="">Show All</option></select>')
                 .appendTo($(column.footer()).empty())
-                .on('change', function(){
+                // .appendTo($(column.header()))
+                .on('change', function(e){
+                    console.log($(this).parent());
                     var val = $.fn.dataTable.util.escapeRegex($(this).val());
                     column.search(val ? '^'+val+'$':'', true, false).draw();
+                    excelUtil.setFilter($(column.header()).text(), $(e.target).val());
                 });
                 column.data().unique().sort().each(function(d, j){
-                    console.log(d, j);
                     var val = $(d).text();
                     if(column.search() === '^'+d+'$'){
                         select.append($('<option value="' + val + '" selected>' + val + '</option>'));
@@ -37,4 +39,6 @@
             });
         }
     });
+
+
 })();

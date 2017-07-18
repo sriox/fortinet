@@ -87,6 +87,7 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/activity-index.js') }}"></script>
+<script src="{{ asset('js/excel.util.js') }}"></script>
+<script src="{{ asset('js/activity.index.js') }}"></script>
 
 @endsection
