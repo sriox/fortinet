@@ -1,5 +1,7 @@
 (function(){
 
+    
+
     $('#table').DataTable({
         paging: true,
         "columnDefs": [
@@ -15,6 +17,10 @@
         scrollY: 350,
         scrollX: true,
         pageLength: 50,
+        fnDrawCallback: function(){
+            $('#preloader').hide();
+            $('#table_canvas').show();
+        },
         initComplete: function(){
             this.api().columns([0, 1, 4, 5, 7]).every(function(index){
                 var column = this;
@@ -37,6 +43,7 @@
                     }
                 });
             });
+            $($.fn.dataTable.tables(true)).DataTable().columns.adjust();            
         }
     });
 

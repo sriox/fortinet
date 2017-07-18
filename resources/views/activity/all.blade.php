@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="{{ asset('css/activity-index.css') }}">
 
 <script src="{{ asset('plugins/perfectscrollbar/perfect-scrollbar.jquery.min.js') }}"></script>
-<script src="{{ asset('js/activity-all.js') }}"></script>
 @endsection
 @section('content')
 <div class="content-header">
@@ -21,7 +20,8 @@
    @endif
     <div class="row">
         <div class="col-md-12">
-           <div id="table_canvas" class="table-canvas">
+            <div class="text-center" id="preloader"><img src="{{ asset('images/preloader.gif') }}" alt=""></div>
+           <div id="table_canvas" class="table-canvas" style="display: none">
             <table class="table table-bordered stripe" id="table">
                 <thead>
                     <tr>
@@ -88,4 +88,5 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('js/activity.all.js') }}"></script>
 @endsection

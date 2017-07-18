@@ -20,6 +20,7 @@
    @endif
     <div class="row">
         <div class="col-md-12">
+           <div class="text-center" id="preloader"><img src="{{ asset('images/preloader.gif') }}" alt=""></div>
            <div id="table_canvas" class="table-canvas">
             <table class="table table-bordered stripe" id="table">
                 <thead>
