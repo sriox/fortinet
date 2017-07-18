@@ -22,7 +22,7 @@
             $('#table_canvas').show();
         },
         initComplete: function(){
-            this.api().columns([0, 1, 4, 5, 7]).every(function(index){
+            this.api().columns([0, 4, 5, 7]).every(function(index){
                 var column = this;
                 // $('<br />').appendTo(column.header());
                 var select = $('<select id="filter_' + index + '"><option value="">Show All</option></select>')
