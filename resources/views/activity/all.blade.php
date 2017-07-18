@@ -33,6 +33,7 @@
                         <th><span style="white-space: nowrap">Country</span></th>
                         <th><span style="white-space: nowrap">Territory</span></th>
                         <th><span style="white-space: nowrap">Technology</span></th>
+                        <th><span style="white-space: nowrap">SE</span></th>
                         <th><span style="white-space: nowrap">Smart Ticket</span></th>
                         <th><span style="white-space: nowrap">Customer</span></th>
                         <th><span style="white-space: nowrap">Activity Executed</span></th>
@@ -52,15 +53,35 @@
                         <td><span style="white-space: nowrap">{{ $activity->country->name }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->country->territory }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->technology->name }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->se->name }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->smart_ticket }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->customer }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->activity_executed }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->getBriefActivityExecuted() }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>
                         <td><span style="white-space: nowrap">@if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}">Edit</a>@endif</span></td>
                         <td><span style="white-space: nowrap">@if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a>@endif</span></td>
                     </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tfoot>
             </table>
             <br />
             </div>
