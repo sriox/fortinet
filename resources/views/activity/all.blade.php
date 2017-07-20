@@ -27,18 +27,18 @@
                     <tr>
                         <th><span style="white-space: nowrap">Member</span></th>
                         <th><span style="white-space: nowrap">Activity</span></th>
-                        <th><span style="white-space: nowrap">Desc</span></th>
-                        <th><span style="white-space: nowrap">Date</span></th>
+                        <th><span style="white-space: nowrap">Description<br />&nbsp;</span></th>
+                        <th><span style="white-space: nowrap">Date<br />&nbsp;</span></th>
                         <th><span style="white-space: nowrap">Quarter</span></th>
                         <th><span style="white-space: nowrap">Country</span></th>
                         <th><span style="white-space: nowrap">Territory</span></th>
                         <th><span style="white-space: nowrap">Technology</span></th>
                         <th><span style="white-space: nowrap">SE</span></th>
-                        <th><span style="white-space: nowrap">Smart Ticket</span></th>
-                        <th><span style="white-space: nowrap">Customer</span></th>
-                        <th><span style="white-space: nowrap">Activity Executed</span></th>
-                        <th><span style="white-space: nowrap">Time (H)</span></th>
-                        <th><span style="white-space: nowrap">Actions</span></th>
+                        <th><span style="white-space: nowrap">Smart Ticket<br />&nbsp;</span></th>
+                        <th><span style="white-space: nowrap">Customer<br />&nbsp;</span></th>
+                        <th><span style="white-space: nowrap">Activity Executed<br />&nbsp;</span></th>
+                        <th><span style="white-space: nowrap">Time (H)<br />&nbsp;</span></th>
+                        <th><span style="white-space: nowrap">Actions<br />&nbsp;</span></th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
