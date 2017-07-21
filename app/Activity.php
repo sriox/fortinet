@@ -53,15 +53,16 @@ class Activity extends Model
         return implode(' ', array_slice(explode(' ', $this->description), 0, 10));
     }
     
-    static public function getQuarterTimeByTerritory($year, $quarter, $is_carrier = 0)
+    static public function getQuarterTimeByTerritory($year, $quarter, $departmentId, $userId)
     {
         $sql = 'SELECT c.territory, CONVERT(SUM(time_used), signed) AS time_used
                 FROM activities a, countries c, users u
                 WHERE c.id = a.country_id 
                 AND a.quarter = '.$quarter.' 
                 AND YEAR(a.date) = '.$year.' 
-                AND u.id = a.user_id 
-                AND u.is_carrier = '.$is_carrier.'
+                AND u.id = a.user_id' 
+                .($departmentId != 0?' AND (u.department_id = '.$departmentId.')':'')
+                .($userId != 0?' AND (u.id = '.$userId.')':'').'
                 GROUP BY c.territory';
         
         $data = DB::select($sql);
@@ -69,15 +70,16 @@ class Activity extends Model
         return $data;
     }
     
-    static public function getQuarterTimeByTechnology($year, $quarter, $is_carrier = 0)
+    static public function getQuarterTimeByTechnology($year, $quarter, $departmentId, $userId)
     {
         $sql = 'SELECT t.name, CONVERT(SUM(time_used), signed) AS time_used
                 FROM activities a, technologies t, users u
                 WHERE t.id = a.technology_id 
                 AND a.quarter = '.$quarter.' 
                 AND YEAR(a.date) = '.$year.' 
-                AND u.id = a.user_id 
-                AND u.is_carrier = '.$is_carrier.'
+                AND u.id = a.user_id' 
+                .($departmentId != 0?' AND (u.department_id = '.$departmentId.')':'')
+                .($userId != 0?' AND (u.id = '.$userId.')':'').'
                 GROUP BY t.name';
         
         $data = DB::select($sql);
@@ -85,14 +87,15 @@ class Activity extends Model
         return $data;
     }
     
-    static public function getQuarterTimeByCountry($year, $quarter, $is_carrier = 0)
+    static public function getQuarterTimeByCountry($year, $quarter, $departmentId, $userId)
     {
         $sql = 'SELECT c.name, CONVERT(SUM(time_used), signed) AS time_used
                 FROM activities a, countries c, users u
                 WHERE c.id = a.country_id AND a.quarter = '.$quarter.' 
                 AND YEAR(a.date) = '.$year.' 
-                AND u.id = a.user_id 
-                AND u.is_carrier = '.$is_carrier.'
+                AND u.id = a.user_id' 
+                .($departmentId != 0?' AND (u.department_id = '.$departmentId.')':'')
+                .($userId != 0?' AND (u.id = '.$userId.')':'').'
                 GROUP BY c.name';
         
         $data = DB::select($sql);
@@ -100,15 +103,16 @@ class Activity extends Model
         return $data;
     }
     
-    static public function getQuarterTimeByActivityType($year, $quarter, $is_carrier = 0)
+    static public function getQuarterTimeByActivityType($year, $quarter, $departmentId, $userId)
     {
         $sql = 'SELECT t.name, CONVERT(SUM(time_used), signed) AS time_used
                 FROM activities a, activity_types t, users u
                 WHERE t.id = a.activity_type_id 
                 AND a.quarter = '.$quarter.' 
                 AND YEAR(a.date) = '.$year.' 
-                AND u.id = a.user_id 
-                AND u.is_carrier = '.$is_carrier.'
+                AND u.id = a.user_id' 
+                .($departmentId != 0?' AND (u.department_id = '.$departmentId.')':'')
+                .($userId != 0?' AND (u.id = '.$userId.')':'').'
                 GROUP BY t.name';
         
         $data = DB::select($sql);
@@ -116,13 +120,15 @@ class Activity extends Model
         return $data;
     }
     
-    static public function getQuarterTimeByUser($year, $quarter, $is_carrier = 0)
+    static public function getQuarterTimeByUser($year, $quarter, $departmentId, $userId)
     {
         $sql = 'SELECT u.name, CONVERT(SUM(time_used), signed) AS time_used
                 FROM activities a, users u
                 WHERE a.quarter = '.$quarter.' 
                 AND YEAR(a.date) = '.$year.' 
-                AND u.id = a.user_id AND u.is_carrier = '.$is_carrier.'
+                AND u.id = a.user_id' 
+                .($departmentId != 0?' AND (u.department_id = '.$departmentId.')':'')
+                .($userId != 0?' AND (u.id = '.$userId.')':'').'
                 GROUP BY u.name';
         
         $data = DB::select($sql);
