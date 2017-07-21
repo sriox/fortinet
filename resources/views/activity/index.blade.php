@@ -39,6 +39,7 @@
                         <th><span style="white-space: nowrap">Time (H)</span></th>
                         <th><span style="white-space: nowrap">Actions</span></th>
                         <th><span style="white-space: nowrap">&nbsp;</span></th>
+                        <th><span style="white-space: nowrap">&nbsp;</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +59,7 @@
                         <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>
                         <td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></span></td>
                         <td><span style="white-space: nowrap"><a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a></span></td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index', 'copy' => true]) }}">Clone</a></span></td>
                     </tr>
                     @endforeach
                 </tbody>
