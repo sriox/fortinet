@@ -22,14 +22,13 @@
             $('#table_canvas').show();
         },
         initComplete: function(){
-            this.api().columns([0, 4, 5, 7]).every(function(index){
+            this.api().columns([1, 4, 5, 6, 7, 8]).every(function(index){
                 var column = this;
                 // $('<br />').appendTo(column.header());
                 var select = $('<select id="filter_' + index + '"><option value="">Show All</option></select>')
                 .appendTo($(column.footer()).empty())
                 // .appendTo($(column.header()))
                 .on('change', function(e){
-                    console.log($(this).parent());
                     var val = $.fn.dataTable.util.escapeRegex($(this).val());
                     column.search(val ? '^'+val+'$':'', true, false).draw();
                     excelUtil.setFilter($(column.header()).text(), $(e.target).val());
