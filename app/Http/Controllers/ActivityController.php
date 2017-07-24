@@ -32,7 +32,8 @@ class ActivityController extends Controller
     
     public function all()
     {
-        $activities = Activity::All()->sortBy('user_id');
+        // $activities = Activity::All()->sortBy('user_id');
+        $activities = Activity::limit(50)->get();
         return view('activity.all', ['activities' => $activities]);
     }
 
