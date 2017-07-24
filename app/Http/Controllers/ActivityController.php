@@ -32,7 +32,8 @@ class ActivityController extends Controller
     
     public function all()
     {
-        $activities = Activity::All()->sortBy('user_id');
+        // $activities = Activity::All()->sortBy('user_id');
+        $activities = Activity::limit(50)->get();
         return view('activity.all', ['activities' => $activities]);
     }
 
@@ -137,6 +138,9 @@ class ActivityController extends Controller
     {
         $activity = Activity::find($id);
         $page = $request->get('page');
+        $copy = $request->has('copy') ? $request->get('copy'): false;
+
+        if($copy) $activity->id = 0;
         
         $countries = Country::all()->sortBy('name');
         $ses = Se::all()->sortBy('name');
@@ -208,4 +212,13 @@ class ActivityController extends Controller
         
         return redirect()->back()->with('msg', 'The activity was deleted');
     }
+
+    public function copy($id)
+    {
+        $activity = Activity::find($id);
+        return view('activities.copy', [
+            'activity' => $activity
+        ]);
+    }
+
 }

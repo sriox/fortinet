@@ -273,6 +273,40 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'ActivityController@show',
             'as' => 'activities.show'
         ]);
+
+        Route::get('copy/{id}', [
+            'uses' => 'ActivityController@copy',
+            'as' => 'activities.copy'
+        ]);
+
+        
+    });
+
+    Route::group(['prefix' => 'departments'], function(){
+        Route::get('/', [
+            'uses' => 'DepartmentController@index',
+            'as' => 'departments.index'
+        ]);
+        Route::get('create', [
+            'uses' => 'DepartmentController@create',
+            'as' => 'departments.create'
+        ]);
+        Route::post('store', [
+            'uses' => 'DepartmentController@store',
+            'as' => 'departments.store'
+        ]);
+        Route::get('edit/{id}', [
+            'uses' => 'DepartmentController@edit',
+            'as' => 'departments.edit'
+        ]);
+        Route::post('update/{id}', [
+            'uses' => 'DepartmentController@update',
+            'as' => 'departments.update'
+        ]);
+        Route::get('delete/{id}', [
+            'uses' => 'DepartmentController@delete',
+            'as' => 'departments.delete'
+        ]);
     });
 });
 

@@ -29,3 +29,8 @@ body {
     height: 380px;
     max-height: 380px;
 }
+
+.table-filter {
+    color: black;
+    font-weight: normal;
+}

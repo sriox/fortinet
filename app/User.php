@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'profile_id'
+        'name', 'email', 'password', 'profile_id', 'department_id'
     ];
 
     /**
@@ -48,6 +48,11 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->belongsTo('App\Profile');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department');
     }
     
     public function getWeekUsedHours()

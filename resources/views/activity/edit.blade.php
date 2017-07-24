@@ -1,12 +1,12 @@
 @extends('layouts.app') @section('content')
 <div class="content body">
-  
-   <form action="{{ route('activities.update', ['id' => $activity->id, 'page' => $page]) }}" method="post" class="form-horizontal">
+  @php($route = $activity->id == 0? 'activities.store': 'activities.update')
+   <form action="{{ route($route, ['id' => $activity->id, 'page' => $page]) }}" method="post" class="form-horizontal">
    {{ csrf_field() }}
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit Activity</div>
+                <div class="panel-heading">{{ $activity->id == 0? 'Clone': 'Edit' }} Activity</div>
                 <div class="panel-body">
                    @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -117,7 +117,7 @@
                 <div class="panel-footer">
                     <div class="form-group">
                        <div class="col-md-2 col-md-offset-10">
-                           <button class="btn btn-primary" type="submit">Update</button>
+                           <button class="btn btn-primary" type="submit">{{ $activity->id == 0?'Clone': 'Update' }}</button>
                        </div>
                     </div>
                 </div>

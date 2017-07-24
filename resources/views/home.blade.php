@@ -19,25 +19,34 @@
     <form action="{{ route('home') }}" method="get" class="form-horizontal">
        <div class="row">
            <div class="col-md-2">
-               <select name="y" id="" class="form-control">
+               <select name="y" id="" class="form-control col-md-12">
                    @foreach($years as $y)
                     <option value="{{ $y->year }}" {{ $year == $y->year? 'selected': '' }}>{{ $y->year }}</option>
                     @endforeach
                 </select>
            </div>
            <div class="col-md-2">
-               <select name="q" id="" class="form-control">
+               <select name="q" id="" class="form-control col-md-12">
                    @for($i = 1; $i < 5; $i++)
                     <option value="{{ $i }}" {{ $i == $quarter? 'selected': '' }}>Q{{ $i }}</option>
                     @endfor
                 </select>
            </div>
            <div class="col-md-2">
-             <div class="form-group">
-                 <label for="is_carrier" class="control-label">Carrier </label>
-               <input type="checkbox" name="c" id="is_carrier" value="1" {{ $isCarrier == 1?'checked':'' }}>
-             </div>
-              
+                 <select name="d" id="department" class="form-control col-md-12">
+                     <option value="">All Departments</option>
+                     @foreach($departments as $department)
+                     <option value="{{ $department->id }}" {{ $department->id == $departmentId? 'selected': '' }}>{{ $department->name }}</option>
+                     @endforeach
+                 </select>
+           </div>
+           <div class="col-md-2">
+                 <select name="u" id="user" class="form-control col-md-12">
+                     <option value="">All Users</option>
+                     @foreach($users as $user)
+                     <option value="{{ $user->id }}" {{ $user->id == $userId? 'selected': '' }}>{{ $user->name }}</option>
+                     @endforeach
+                 </select>
            </div>
            <div class="col-md-2">
                <button class="btn btn-primary">Filter</button>

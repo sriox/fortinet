@@ -1,5 +1,5 @@
 @extends('layouts.app') @section('content')
-<div class="container">
+<div class="content body">
   
    <form action="{{ route('users.store') }}" method="post" class="form-horizontal">
    {{ csrf_field() }}
@@ -32,6 +32,17 @@
                                 <option value="">-- Select --</option>
                                 @foreach($profiles as $profile)
                                 <option value="{{ $profile->id }}">{{ $profile->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>                            
+                    <div class="form-group">
+                        <label for="department" class="control-label col-md-4">Department</label>
+                        <div class="col-md-6">
+                            <select name="department" id="department" class="form-control" required>
+                                <option value="">-- Select --</option>
+                                @foreach($departments as $department)
+                                <option value="{{ $department->id }}">{{ $department->name }}</option>
                                 @endforeach
                             </select>
                         </div>

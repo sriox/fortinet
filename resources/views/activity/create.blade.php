@@ -126,5 +126,5 @@
     </div>
     </form>
 </div>
-<script src="{{ asset('js/activity-create.js') }}"></script>
+<script src="{{ asset('js/activity.create.js') }}"></script>
 @endsection
