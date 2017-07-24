@@ -52,6 +52,11 @@ class Activity extends Model
     {
         return implode(' ', array_slice(explode(' ', $this->description), 0, 10));
     }
+
+    public function getBriefActivityExecuted()
+    {
+        return implode(' ', array_slice(explode(' ', $this->activity_executed), 0, 10));
+    }
     
     static public function getQuarterTimeByTerritory($year, $quarter, $departmentId, $userId)
     {
