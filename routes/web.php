@@ -273,6 +273,13 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'ActivityController@show',
             'as' => 'activities.show'
         ]);
+
+        Route::get('copy/{id}', [
+            'uses' => 'ActivityController@copy',
+            'as' => 'activities.copy'
+        ]);
+
+        
     });
 
     Route::group(['prefix' => 'departments'], function(){
