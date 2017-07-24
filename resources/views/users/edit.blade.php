@@ -34,6 +34,17 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="department" class="control-label col-md-4">Department</label>
+                        <div class="col-md-6">
+                            <select name="department" id="department" class="form-control" required>
+                                <option value="">-- Select --</option>
+                                @foreach($departments as $department)
+                                <option value="{{ $department->id }}" {{ ($user->department && $user->department->id == $department->id)? 'selected': '' }} >{{ $department->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>                         
                 </div>
                 <div class="panel-footer">

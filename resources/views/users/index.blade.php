@@ -27,6 +27,7 @@
                         <th>Name ({{ count($users) }})</th>
                         <th>Email</th>
                         <th>Profile</th>
+                        <th>Department</th>
                         <th>Status</th>
                         <th>Actions</th>
                         <th>&nbsp;</th>
@@ -38,6 +39,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->profile->name }}</td>
+                        <td>{{ $user->department? $user->department->name: 'NOT SELECTED' }}</td>
                         <td>{{ is_null($user->deleted_at) ? 'Active': 'Inactive' }}</td>
                         <td><a href="{{ route('users.edit', ['id' => $user->id]) }}">Edit</a></td>
                         <td><a href="{{ route('users.delete', ['id' => $user->id]) }}">@if($user->trashed()) Activate @else Delete @endif</a></td>

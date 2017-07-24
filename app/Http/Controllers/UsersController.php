@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Profile;
+use App\Department;
 
 class UsersController extends Controller
 {
@@ -28,7 +29,11 @@ class UsersController extends Controller
     public function create()
     {
         $profiles = Profile::all()->sortBy('name');
-        return view('users.create', ['profiles' => $profiles]);
+        $departments = Department::all()->sortBy('name');
+        return view('users.create', [
+            'profiles' => $profiles,
+            'departments' => $departments
+        ]);
     }
 
     /**
@@ -42,14 +47,16 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users',
-            'profile' => 'required'
+            'profile' => 'required',
+            'department' => 'required'
         ]);
         
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('email')),
-            'profile_id' => $request->input('profile')
+            'profile_id' => $request->input('profile'),
+            'department_id' => $request->input('department')
         ]);
         
         return redirect()->route('users.index')->with('msg', 'User Created');
@@ -76,18 +83,24 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $profiles = Profile::all();
+        $departments = Department::all()->sortBy('name');
         $adminProfile = $profiles->where('key', '=', 'ADMIN')->first();
         
         
         
-        if($user->profile->key == 'ADMIN'){
+        if($user->profile->key == $adminProfile->key)   {
             $adminsCount = User::where('profile_id', '=', $adminProfile->id)->count();
             $profileChangeable = $adminsCount > 1;
         }else{
             $profileChangeable = true;
         }
         
-        return view('users.edit', ['user' => $user, 'profiles' => $profiles, 'profileChangeable' => $profileChangeable]);
+        return view('users.edit', [
+            'user' => $user, 
+            'profiles' => $profiles, 
+            'profileChangeable' => $profileChangeable,
+            'departments' => $departments
+        ]);
     }
 
     /**
@@ -102,16 +115,19 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$id,
-            'profile' => 'required'
+            'profile' => 'required',
+            'department' => 'required'
         ]);
         
         $profile = Profile::find($request->input('profile'));
+        $department = Department::find($request->input('department'));
         
         $user = User::find($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         
         $profile->users()->save($user);
+        $department->users()->save($user);
         
         return redirect()->route('users.index')->with('msg', 'User '.$request->name.' was updated');
     }

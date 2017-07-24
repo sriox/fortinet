@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Activity;
+use App\Department;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -27,15 +29,19 @@ class HomeController extends Controller
     {
         $year = $request->has('y')? $request->input('y'): date("Y");
         $quarter = $request->has('q')? $request->input('q'): ceil(date('n', time()) / 3);
-        $isCarrier = $request->has('c')? $request->input('c'): 0;
+        $departmentId = $request->has('d')? $request->input('d'): 0;
+        $userId = $request->has('u')? $request->input('u'): 0;
+
+        $departments = Department::all()->sortBy('name');
+        $users = User::all()->sortBy('name');
         
-        $userData = Activity::getQuarterTimeByUser($year, $quarter, $isCarrier);
-        $activityTypeData = Activity::getQuarterTimeByActivityType($year, $quarter, $isCarrier);
-        $territoryData = Activity::getQuarterTimeByTerritory($year, $quarter, $isCarrier);
-        $countryData = Activity::getQuarterTimeByCountry($year, $quarter, $isCarrier);
-        $technologyData = Activity::getQuarterTimeByTechnology($year, $quarter, $isCarrier);
+        $userData = Activity::getQuarterTimeByUser($year, $quarter, $departmentId, $userId);
+        $activityTypeData = Activity::getQuarterTimeByActivityType($year, $quarter, $departmentId, $userId);
+        $territoryData = Activity::getQuarterTimeByTerritory($year, $quarter, $departmentId, $userId);
+        $countryData = Activity::getQuarterTimeByCountry($year, $quarter, $departmentId, $userId);
+        $technologyData = Activity::getQuarterTimeByTechnology($year, $quarter, $departmentId, $userId);
         $years = $this->getValidYears();
-        //dd($years);
+
         return view('home', [
             'userData' => $userData, 
             'activityTypeData' => $activityTypeData,
@@ -45,7 +51,10 @@ class HomeController extends Controller
             'year' => $year,
             'quarter' => $quarter,
             'years' => $years,
-            'isCarrier' => $isCarrier
+            'departmentId' => $departmentId,
+            'departments' => $departments,
+            'users' => $users,
+            'userId' => $userId
         ]);
     }
     
