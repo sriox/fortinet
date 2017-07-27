@@ -25,9 +25,8 @@
     
     <!-- Plugins -->
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('plugins/datatables/jquery.dataTables.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    
 
     <!-- Assets AdminLTE -->
     <link href="{{ asset('vendor/adminlte/css/AdminLTE.min.css') }}" rel="stylesheet">
@@ -45,11 +44,23 @@
     <script src="{{ asset('plugins/jQueryUI/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/fastclick/fastclick.min.js') }}"></script>
-    <!-- <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script> -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
   
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+  <!--datatables styles-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/dataTables.bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/buttons.dataTables.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/buttons.jqueryui.min.css') }}">
+
+  <!--datatables scripts-->
+    <script src="{{ asset('plugins/datatables/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.foundation.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.jqueryui.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.print.min.js') }}"></script>
+    
 
     <!-- Scripts AdminLTE -->
     <!-- <script src="{{ asset('vendor/adminlte/js/app.min.js') }}"></script> -->

@@ -34,3 +34,7 @@ body {
     color: black;
     font-weight: normal;
 }
+
+.ui-button-text{
+    color: black;
+}
