@@ -89,7 +89,7 @@
         },
         dom: 'Bfrtip',
         buttons: [
-            'excel', 'csv'
+            'excel'
         ]
     });
 })();
