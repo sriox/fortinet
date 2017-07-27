@@ -86,6 +86,10 @@
                 });
             });
             $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        }
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'csv'
+        ]
     });
 })();
