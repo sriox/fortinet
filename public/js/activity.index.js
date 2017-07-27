@@ -2,7 +2,7 @@
 
     
 
-    $('#table').DataTable({
+    var table = $('#table').DataTable({
         paging: true,
         "columnDefs": [
             {
@@ -44,10 +44,12 @@
             });
             $($.fn.dataTable.tables(true)).DataTable().columns.adjust();            
         },
-        dom: 'Bfrtip',
+        // dom: 'Bfrtip',
         buttons: [
             'excel'
         ]
     });
+
+    table.buttons().container().insertBefore('#table_filter');
 
 })();
