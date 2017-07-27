@@ -46,7 +46,7 @@
         },
         // dom: 'Bfrtip',
         buttons: [
-            'excel'
+            'csv'
         ]
     });
 
