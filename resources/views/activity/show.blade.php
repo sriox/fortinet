@@ -76,8 +76,14 @@
         </div>
         <div class="panel-footer">
            <div class="row">
-               <div class="col-md-12">
-                   <a href="{{ redirect()->back()->getTargetUrl() }}" class="pull-right">Back</a>
+                <div class="col-md-2">
+                    <a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index', 'copy' => true]) }}" class="btn btn-primary col-md-12"><span class="glyphicon glyphicon-new-window"></span> Clone</a>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}" class="btn btn-info col-md-12"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                </div>
+               <div class="col-md-2">
+                   <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-success col-md-12"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
                </div>
            </div>
             
