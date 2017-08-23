@@ -83,7 +83,8 @@
                     <a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}" class="btn btn-info col-md-12"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                 </div>
                <div class="col-md-2">
-                   <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-success col-md-12"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                   <!--<a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-success col-md-12"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>-->
+                   <a href="#" class="btn btn-success col-md-12" onclick="window.close();"><span class="glyphicon glyphicon-remove"></span> Close</a>
                </div>
            </div>
             
