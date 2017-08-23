@@ -47,7 +47,7 @@
                     <tr>
                         <td><span style="white-space: nowrap">{{ $activity->user->name }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->activityType->name }}</span></td>
-                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}">{{ $activity->getBriefDescription() }}</a></span></td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}" target="_blank">{{ $activity->getBriefDescription() }}</a></span></td>
                         <td><span style="white-space: nowrap">{{ $activity->date }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->quarter }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->country->name }}</span></td>
