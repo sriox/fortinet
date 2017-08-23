@@ -88,9 +88,9 @@
             $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
         },
         // dom: 'Bfrtip',
-        buttons: [
-            'csv'
-        ]
+        // buttons: [
+        //     'csv'
+        // ]
     });
 
     table.buttons().container().insertBefore('#table_filter');
