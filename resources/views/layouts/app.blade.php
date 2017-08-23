@@ -62,6 +62,9 @@
     <script src="{{ asset('plugins/datatables/js/buttons.print.min.js') }}"></script>
     
 
+    <!-- Config -->
+    <script src="{{ asset('./js/config.js') }}"></script>
+
     <!-- Scripts AdminLTE -->
     <!-- <script src="{{ asset('vendor/adminlte/js/app.min.js') }}"></script> -->
 

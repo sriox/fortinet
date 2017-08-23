@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="date" class="control-label col-md-4">Start Date <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" name="date" id="date" class="form-control" value="{{ $activity->date }}" required>
+                            <input type="text" name="date" id="date" class="form-control datepicker" value="{{ $activity->date }}" required>
                         </div>
                     </div>
                     <!-- <div class="form-group">
@@ -126,5 +126,5 @@
     </div>
     </form>
 </div>
-<script src="{{ asset('js/activity-create.js') }}"></script>
+<script src="{{ asset('js/activity.create.js') }}"></script>
 @endsection
