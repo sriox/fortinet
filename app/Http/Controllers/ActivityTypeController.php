@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ActivityType;
+use App\Department;
+use App\ActivityType_Department;
+use Illuminate\Support\Facades\DB;
 
 class ActivityTypeController extends Controller
 {
@@ -113,5 +116,40 @@ class ActivityTypeController extends Controller
     public function destroy($id)
     {
         
+    }
+
+    public function associate()
+    {
+        $departments = Department::all();
+        $activityTypes = ActivityType::with('departments')->get()->sortBy('name');
+
+        foreach($activityTypes as $at){
+            $at->departmentsId = array_column($at->departments->toArray(), 'id');
+        }
+
+        return view('activityType.associate', [
+            'departments' => $departments,
+            'activityTypes' => $activityTypes
+        ]);
+    }
+
+    public function saveAssociation(Request $request)
+    {
+
+        
+        DB::transaction(function() use ($request){
+            //Deletes all relationships to create all new
+            ActivityType_Department::truncate();
+
+            //iterate over the selected options to create the relationships
+            foreach($request->input('association') as $association){
+                ActivityType_Department::create([
+                    'activity_type_id' =>  explode("-", $association)[0],
+                    'department_id' => explode("-", $association)[1]
+                ]);
+            }
+        });
+        
+        return redirect()->back()->with('msg', 'The activity types were associated');
     }
 }

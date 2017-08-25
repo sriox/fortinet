@@ -20,4 +20,9 @@ class ActivityType extends Model
     {
         return $this->hasMany('App\Activity');
     }
+
+    public function departments()
+    {
+        return $this->belongsToMany('App\Department');
+    }
 }
