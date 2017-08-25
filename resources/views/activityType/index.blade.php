@@ -14,7 +14,8 @@
    @endif
    @if(Auth::user()->profile->key == 'ADMIN')
     <div class="row">
-        <div class="col-md-3"><a href="{{ route('activityTypes.create') }}" class="btn btn-primary">Add Activity Type</a></div>
+        <div class="col-md-2"><a href="{{ route('activityTypes.create') }}" class="btn btn-primary col-md-12">Add Activity Type</a></div>
+        <div class="col-md-3"><a href="{{ route('activityTypes.associate') }}" class="btn btn-primary col-md-12">Associate with departments</a></div>
     </div>
     @endif
     <br>

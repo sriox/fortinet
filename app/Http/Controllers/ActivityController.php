@@ -12,6 +12,8 @@ use App\Technology;
 use App\Carrier;
 use App\Config;
 use Auth;
+use App\User;
+use App\Department;
 
 class ActivityController extends Controller
 {
@@ -44,10 +46,14 @@ class ActivityController extends Controller
      */
     public function create()
     {
+        $user = User::find(Auth::id());
+        $userDepartment = Department::find($user->department->id);
+
+
         $countries = Country::all()->sortBy('name');
         $ses = Se::all()->sortBy('name');
         $technologies = Technology::whereNull('deleted_at')->get()->sortBy('name');
-        $activityTypes = ActivityType::all()->sortBy('name');
+        $activityTypes = $userDepartment->activityTypes;
         $carriers = Carrier::all()->sortBy('name');
         
         return view('activity.create', [
@@ -140,12 +146,18 @@ class ActivityController extends Controller
         $page = $request->get('page');
         $copy = $request->has('copy') ? $request->get('copy'): false;
 
+        //get current user to filter activity types by its department
+        $user = User::find(Auth::id());
+        $userDepartment = $user->department;
+
+        //If it is cloning action the id should be zero
         if($copy) $activity->id = 0;
         
+        //Get all the parameter options
         $countries = Country::all()->sortBy('name');
         $ses = Se::all()->sortBy('name');
         $technologies = Technology::whereNull('deleted_at')->get()->sortBy('name');
-        $activityTypes = ActivityType::all()->sortBy('name');
+        $activityTypes = $userDepartment->activityTypes;
         $carriers = Carrier::all()->sortBy('name');
         
         return view('activity.edit', [

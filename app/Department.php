@@ -16,4 +16,9 @@ class Department extends Model
     public function users(){
         return $this->hasMany('App\User');
     }
+
+    public function activityTypes()
+    {
+        return $this->belongsToMany('App\ActivityType');
+    }
 }
