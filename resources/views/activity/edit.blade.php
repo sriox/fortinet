@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label for="smartTicket" class="control-label col-md-4">Smart Ticket</label>
                         <div class="col-md-6">
-                            <input type="text" name="smartTicket" id="smartTicket" class="form-control" value="{{ $activity->smart_ticket }}">
+                            <input type="number" name="smartTicket" id="smartTicket" class="form-control" value="{{ $activity->smart_ticket }}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label for="activityExecuted" class="control-label col-md-4">Activity Executed <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <textarea name="activityExecuted" id="activityExecuted" cols="30" rows="5" class="form-control">{{ $activity->activity_executed }}</textarea>
+                            <textarea name="activityExecuted" id="activityExecuted" required cols="30" rows="5" class="form-control">{{ $activity->activity_executed }}</textarea>
                         </div>
                     </div>
                     
