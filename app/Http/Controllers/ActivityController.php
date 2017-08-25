@@ -76,9 +76,10 @@ class ActivityController extends Controller
             'description' => 'required',
             'timeUsed' => 'required|integer',
             'customer' => 'max:255',
-            'smartTicket' => 'max:255',
+            'smartTicket' => 'numeric',
             'timeUsed' => 'numeric',
-            'carrier' => 'required'
+            'carrier' => 'required',
+            'activity_executed' => 'required'
         ]);
         
         Activity::create([
@@ -176,7 +177,9 @@ class ActivityController extends Controller
             'se' => 'required',
             'description' => 'required',
             'timeUsed' => 'required|numeric',
-            'carrier' => 'required'
+            'carrier' => 'required',
+            'activity_executed' => 'required',
+            'smart_ticket' => 'numeric'
         ]);
         
         $activity = Activity::find($id);

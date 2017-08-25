@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="activityExecuted" class="control-label col-md-4">Activity Executed</label>
+                        <label for="activityExecuted" class="control-label col-md-4">Activity Executed <span class="required-field">*</span></label>
                         <div class="col-md-6">
                             <textarea name="activityExecuted" id="activityExecuted" cols="30" rows="5" class="form-control">{{ $activity->activity_executed }}</textarea>
                         </div>
