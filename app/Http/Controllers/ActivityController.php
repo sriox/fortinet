@@ -82,7 +82,7 @@ class ActivityController extends Controller
             'description' => 'required',
             'timeUsed' => 'required|integer',
             'customer' => 'max:255',
-            'smartTicket' => 'numeric',
+            'smartTicket' => 'nullable|numeric',
             'timeUsed' => 'numeric',
             'carrier' => 'required',
             'activityExecuted' => 'required'
@@ -191,7 +191,7 @@ class ActivityController extends Controller
             'timeUsed' => 'required|numeric',
             'carrier' => 'required',
             'activityExecuted' => 'required',
-            'smartTicket' => 'numeric'
+            'smartTicket' => 'nullable|numeric'
         ]);
         
         $activity = Activity::find($id);
