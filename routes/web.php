@@ -294,6 +294,16 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'activities.copy'
         ]);
 
+        Route::post('savework', [
+            'uses' => 'ActivityController@saveWork',
+            'as' => 'activities.savework'
+        ]);
+
+        Route::get('deletework/{id}', [
+            'uses' => 'ActivityController@deleteWork',
+            'as' => 'activities.deletework'
+        ]);
+
         
     });
 

@@ -14,6 +14,7 @@ use App\Config;
 use Auth;
 use App\User;
 use App\Department;
+use App\Work;
 
 class ActivityController extends Controller
 {
@@ -88,21 +89,32 @@ class ActivityController extends Controller
             'activityExecuted' => 'required'
         ]);
         
-        Activity::create([
-            'user_id' => Auth::id(),
-            'activity_type_id' => $request->input('activityType'),
-            'date' => $request->input('date'),
-            'quarter' => $this->quarter(date($request->input('date'))),
-            'country_id' => $request->input('country'),
-            'technology_id' => $request->input('technology'),
-            'smart_ticket' => $request->input('smartTicket'),
-            'se_id' => $request->input('se'),
-            'customer' => $request->input('customer'),
-            'description' => $request->input('description'),
-            'activity_executed' => $request->input('activityExecuted'),
-            'time_used' => $request->input('timeUsed'),
-            'carrier_id' => $request->input('carrier')
-        ]);
+        DB::transaction(function() use ($request){
+            $activity = Activity::create([
+                'user_id' => Auth::id(),
+                'activity_type_id' => $request->input('activityType'),
+                'date' => $request->input('date'),
+                'quarter' => $this->quarter(date($request->input('date'))),
+                'country_id' => $request->input('country'),
+                'technology_id' => $request->input('technology'),
+                'smart_ticket' => $request->input('smartTicket'),
+                'se_id' => $request->input('se'),
+                'customer' => $request->input('customer'),
+                'description' => $request->input('description'),
+                //'activity_executed' => $request->input('activityExecuted'),
+                //'time_used' => $request->input('timeUsed'),
+                'carrier_id' => $request->input('carrier')
+            ]);
+
+            Work::create([
+                'activity_id' => $activity->id,
+                'date' => $activity->date,
+                'description' => $request->input('activityExecuted'),
+                'time' => $request->input('timeUsed')
+            ]);
+        });
+
+        
         
         return redirect()->route('activities.index');
     }
@@ -234,6 +246,30 @@ class ActivityController extends Controller
         return view('activities.copy', [
             'activity' => $activity
         ]);
+    }
+
+    public function saveWork(Request $request)
+    {
+        $this->validate($request, [
+            'date' => 'required|date',
+            'description' => 'required',
+            'time' => 'required|numeric'
+        ]);
+
+        Work::create([
+            'activity_id' => $request->input('activityId'),
+            'date' => $request->input('date'),
+            'description' => $request->input('description'),
+            'time' => $request->input('time')
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function deleteWork($id)
+    {
+        Work::destroy($id);
+        return redirect()->back();
     }
 
 }
