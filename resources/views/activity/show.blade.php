@@ -64,15 +64,61 @@
                    <td><strong>Description</strong></td>
                    <td>{{ $activity->description }}</td>
                </tr>
-               <tr>
+               <!--<tr>
                    <td><strong>Activity Executed</strong></td>
                    <td>{{ $activity->activity_executed }}</td>
                </tr>
                <tr>
                    <td><strong>Time Used (h)</strong></td>
                    <td>{{ $activity->time_used }}</td>
-               </tr>
+               </tr>-->
            </table>
+           <div class="bg-info"><strong>Add Work</strong></div>
+           <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <div class="container">
+                        <form action="{{ route('activities.savework') }}" method="POST" class="form form-horizontal">
+                            {{ csrf_field() }}
+                            <input type="hidden" value="{{ $activity->id }}" name="activityId">
+                            <div class="row">
+                                <div class="col-md-2"><input type="text" placeholder="Date" required name="date" class="col-md-12 datepicker form-control"></div>
+                                <div class="col-md-6"><textarea name="description" id="" required cols="30" rows="2" class="form-control col-md-12"></textarea></div>
+                                <div class="col-md-2"><input type="number" name="time" required class="col-md-12 form-control" step="0.1"></div>
+                                <div class="col-md-2"><input type="submit" value="Add Work" class="btn btn-primary" /></div>
+                            </div>
+                        </form>
+                    </div>
+               </div>
+               
+           </div>
+           <br/>
+           <div class="bg-info"><strong>Activity Works</strong> <span class="badge">{{ count($activity->works) }}</span></div>
+           <div>
+            <br/>
+            <table class="table table-striped">
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Time</th>
+                    <th>&nbsp;</th>
+                </tr>
+                @foreach($activity->works->sortByDesc('date') as $work)
+                <tr>
+                    <td>{{ $work->date }}</td>
+                    <td>{{ $work->description }}</td>
+                    <td>{{ $work->time }}</td>
+                    <td><a href="{{ route('activities.deletework', ['id' => $work->id]) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><strong>{{ $activity->getTotalTime() }}</strong></td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+           </div>
         </div>
         <div class="panel-footer">
            <div class="row">
@@ -92,6 +138,7 @@
     </div>
     
 </div>
+<script src="{{ asset('js/activity.show.js') }}"></script>
 @endsection
    
 
