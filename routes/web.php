@@ -30,6 +30,11 @@ Route::get('loginm', [
     'as' => 'loginm'
 ]);
 
+Route::get('tests', [
+    'uses' => 'TestsController@activityTypesDepartmentTest',
+    'as' => 'tests.activitytypes'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('dashboard', function(){
         return view('dashboard.index');
@@ -103,6 +108,16 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'ActivityTypeController@update',
             'as' => 'activityTypes.update'
         ]);    
+
+        Route::get('associate', [
+            'uses' => 'ActivityTypeController@associate',
+            'as' => 'activityTypes.associate'
+        ]);
+
+        Route::post('saveAssociation', [
+            'uses' => 'ActivityTypeController@saveAssociation',
+            'as' => 'activityTypes.saveAssociation'
+        ]);
     });
 
     Route::group(['prefix' => 'countries'], function(){
@@ -277,6 +292,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('copy/{id}', [
             'uses' => 'ActivityController@copy',
             'as' => 'activities.copy'
+        ]);
+
+        Route::post('savework', [
+            'uses' => 'ActivityController@saveWork',
+            'as' => 'activities.savework'
+        ]);
+
+        Route::get('deletework/{id}', [
+            'uses' => 'ActivityController@deleteWork',
+            'as' => 'activities.deletework'
         ]);
 
         

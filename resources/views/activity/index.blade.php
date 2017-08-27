@@ -27,6 +27,7 @@
                     <tr>
                         <th><span style="white-space: nowrap">Member</span></th>
                         <th><span style="white-space: nowrap">Activity</span></th>
+                        <th><span style="white-space: nowrap">Actions</span></th>
                         <th><span style="white-space: nowrap">Desc</span></th>
                         <th><span style="white-space: nowrap">Date</span></th>
                         <th><span style="white-space: nowrap">Quarter</span></th>
@@ -38,9 +39,9 @@
                         <th><span style="white-space: nowrap">Customer</span></th>
                         <th><span style="white-space: nowrap">Activity Executed</span></th>
                         <th><span style="white-space: nowrap">Time (H)</span></th>
-                        <th><span style="white-space: nowrap">Actions</span></th>
+                        <!--<th><span style="white-space: nowrap">Actions</span></th>
                         <th><span style="white-space: nowrap">&nbsp;</span></th>
-                        <th><span style="white-space: nowrap">&nbsp;</span></th>
+                        <th><span style="white-space: nowrap">&nbsp;</span></th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +49,14 @@
                     <tr>
                         <td><span style="white-space: nowrap">{{ $activity->user->name }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->activityType->name }}</span></td>
-                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}">{{ $activity->getBriefDescription()."..." }}</a></span></td>
+                        <td>
+                            <span style="white-space: nowrap">
+                                <a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index', 'copy' => true]) }}"><span title="Clone" class="glyphicon glyphicon-new-window"></span></a>
+                                <a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}"><span title="Edit" class="glyphicon glyphicon-edit"></span></a>
+                                <a href="{{ route('activities.destroy', ['id' => $activity->id]) }}"><span title="Edit" class="glyphicon glyphicon-trash"></span></a>
+                            </span>
+                        </td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}" target="_blank">{{ $activity->getBriefDescription()."..." }}</a></span></td>
                         <td><span style="white-space: nowrap">{{ $activity->date }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->quarter }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->country->name }}</span></td>
@@ -59,9 +67,9 @@
                         <td><span style="white-space: nowrap">{{ $activity->customer }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->getBriefActivityExecuted()."..." }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>
-                        <td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></span></td>
+                        <!--<td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></span></td>
                         <td><span style="white-space: nowrap"><a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a></span></td>
-                        <td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index', 'copy' => true]) }}">Clone</a></span></td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index', 'copy' => true]) }}">Clone</a></span></td>-->
                     </tr>
                     @endforeach
                 </tbody>
@@ -80,8 +88,9 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
+                        <!--<td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>-->
                     </tr>
                 </tfoot>
             </table>

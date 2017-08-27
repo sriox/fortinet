@@ -12,6 +12,9 @@ use App\Technology;
 use App\Carrier;
 use App\Config;
 use Auth;
+use App\User;
+use App\Department;
+use App\Work;
 
 class ActivityController extends Controller
 {
@@ -44,10 +47,14 @@ class ActivityController extends Controller
      */
     public function create()
     {
+        $user = User::find(Auth::id());
+        $userDepartment = Department::find($user->department->id);
+
+
         $countries = Country::all()->sortBy('name');
         $ses = Se::all()->sortBy('name');
         $technologies = Technology::whereNull('deleted_at')->get()->sortBy('name');
-        $activityTypes = ActivityType::all()->sortBy('name');
+        $activityTypes = $userDepartment->activityTypes;
         $carriers = Carrier::all()->sortBy('name');
         
         return view('activity.create', [
@@ -76,26 +83,38 @@ class ActivityController extends Controller
             'description' => 'required',
             'timeUsed' => 'required|integer',
             'customer' => 'max:255',
-            'smartTicket' => 'max:255',
+            'smartTicket' => 'nullable|numeric',
             'timeUsed' => 'numeric',
-            'carrier' => 'required'
+            'carrier' => 'required',
+            'activityExecuted' => 'required'
         ]);
         
-        Activity::create([
-            'user_id' => Auth::id(),
-            'activity_type_id' => $request->input('activityType'),
-            'date' => $request->input('date'),
-            'quarter' => $this->quarter(date($request->input('date'))),
-            'country_id' => $request->input('country'),
-            'technology_id' => $request->input('technology'),
-            'smart_ticket' => $request->input('smartTicket'),
-            'se_id' => $request->input('se'),
-            'customer' => $request->input('customer'),
-            'description' => $request->input('description'),
-            'activity_executed' => $request->input('activityExecuted'),
-            'time_used' => $request->input('timeUsed'),
-            'carrier_id' => $request->input('carrier')
-        ]);
+        DB::transaction(function() use ($request){
+            $activity = Activity::create([
+                'user_id' => Auth::id(),
+                'activity_type_id' => $request->input('activityType'),
+                'date' => $request->input('date'),
+                'quarter' => $this->quarter(date($request->input('date'))),
+                'country_id' => $request->input('country'),
+                'technology_id' => $request->input('technology'),
+                'smart_ticket' => $request->input('smartTicket'),
+                'se_id' => $request->input('se'),
+                'customer' => $request->input('customer'),
+                'description' => $request->input('description'),
+                //'activity_executed' => $request->input('activityExecuted'),
+                //'time_used' => $request->input('timeUsed'),
+                'carrier_id' => $request->input('carrier')
+            ]);
+
+            Work::create([
+                'activity_id' => $activity->id,
+                'date' => $activity->date,
+                'description' => $request->input('activityExecuted'),
+                'time' => $request->input('timeUsed')
+            ]);
+        });
+
+        
         
         return redirect()->route('activities.index');
     }
@@ -140,12 +159,18 @@ class ActivityController extends Controller
         $page = $request->get('page');
         $copy = $request->has('copy') ? $request->get('copy'): false;
 
+        //get current user to filter activity types by its department
+        $user = User::find(Auth::id());
+        $userDepartment = $user->department;
+
+        //If it is cloning action the id should be zero
         if($copy) $activity->id = 0;
         
+        //Get all the parameter options
         $countries = Country::all()->sortBy('name');
         $ses = Se::all()->sortBy('name');
         $technologies = Technology::whereNull('deleted_at')->get()->sortBy('name');
-        $activityTypes = ActivityType::all()->sortBy('name');
+        $activityTypes = $userDepartment->activityTypes;
         $carriers = Carrier::all()->sortBy('name');
         
         return view('activity.edit', [
@@ -176,7 +201,9 @@ class ActivityController extends Controller
             'se' => 'required',
             'description' => 'required',
             'timeUsed' => 'required|numeric',
-            'carrier' => 'required'
+            'carrier' => 'required',
+            'activityExecuted' => 'required',
+            'smartTicket' => 'nullable|numeric'
         ]);
         
         $activity = Activity::find($id);
@@ -219,6 +246,30 @@ class ActivityController extends Controller
         return view('activities.copy', [
             'activity' => $activity
         ]);
+    }
+
+    public function saveWork(Request $request)
+    {
+        $this->validate($request, [
+            'date' => 'required|date',
+            'description' => 'required',
+            'time' => 'required|numeric'
+        ]);
+
+        Work::create([
+            'activity_id' => $request->input('activityId'),
+            'date' => $request->input('date'),
+            'description' => $request->input('description'),
+            'time' => $request->input('time')
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function deleteWork($id)
+    {
+        Work::destroy($id);
+        return redirect()->back();
     }
 
 }

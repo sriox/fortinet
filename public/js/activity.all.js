@@ -41,7 +41,7 @@
         paging: true,
         "columnDefs": [
             {
-                "targets": [ 10 ],
+                "targets": [ 11 ],
                 "visible": false            
             }
         ],
@@ -59,7 +59,7 @@
         },
         initComplete: function(){
 
-            this.api().columns([0, 1, 4, 5, 6, 7, 8]).every(function(index) {
+            this.api().columns([0, 1, 5, 6, 7, 9]).every(function(index) {
                 var column = this;
                 var name = $(column.header()).text();
                 var select = $('<select class="table-filter" name="' + name + '"><option value="">Show All</option></select>')
@@ -88,9 +88,9 @@
             $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
         },
         // dom: 'Bfrtip',
-        buttons: [
-            'csv'
-        ]
+        // buttons: [
+        //     'csv'
+        // ]
     });
 
     table.buttons().container().insertBefore('#table_filter');

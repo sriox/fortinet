@@ -22,24 +22,23 @@
         <div class="col-md-12">
             <div class="text-center" id="preloader"><img src="{{ asset('images/preloader.gif') }}" alt=""></div>
            <div id="table_canvas" class="table-canvas" style="display: none">
-            <table class="table table-bordered stripe" id="table">
+            <table class="table table-bordered stripe" id="table" style="white-space: nowrap">
                 <thead>
                     <tr>
-                        <th><span style="white-space: nowrap">Member</span></th>
-                        <th><span style="white-space: nowrap">Activity</span></th>
-                        <th><span style="white-space: nowrap">Description<br />&nbsp;</span></th>
-                        <th><span style="white-space: nowrap">Date<br />&nbsp;</span></th>
-                        <th><span style="white-space: nowrap">Quarter</span></th>
-                        <th><span style="white-space: nowrap">Country</span></th>
-                        <th><span style="white-space: nowrap">Territory</span></th>
-                        <th><span style="white-space: nowrap">Technology</span></th>
-                        <th><span style="white-space: nowrap">SE</span></th>
-                        <th><span style="white-space: nowrap">Smart Ticket<br />&nbsp;</span></th>
-                        <th><span style="white-space: nowrap">Customer<br />&nbsp;</span></th>
-                        <th><span style="white-space: nowrap">Activity Executed<br />&nbsp;</span></th>
-                        <th><span style="white-space: nowrap">Time (H)<br />&nbsp;</span></th>
-                        <th><span style="white-space: nowrap">Actions<br />&nbsp;</span></th>
-                        <th>&nbsp;</th>
+                        <th>Member</th>
+                        <th>Activity</th>
+                        <th>Actions</th>
+                        <th>Description<br />&nbsp;</th>
+                        <th>Date<br />&nbsp;</th>
+                        <th>Quarter</th>
+                        <th>Country</th>
+                        <th>Territory</th>
+                        <th>Technology</th>
+                        <th>SE</th>
+                        <th>Smart Ticket<br />&nbsp;</th>
+                        <th>Customer<br />&nbsp;</th>
+                        <th>Activity Executed<br />&nbsp;</th>
+                        <th>Time (H)<br />&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +46,14 @@
                     <tr>
                         <td><span style="white-space: nowrap">{{ $activity->user->name }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->activityType->name }}</span></td>
-                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}">{{ $activity->getBriefDescription() }}</a></span></td>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all', 'copy' => true]) }}"><span title="Clone" class="glyphicon glyphicon-new-window"></span></a>@endif
+                                @if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}"><span title="Edit" class="glyphicon glyphicon-edit"></span></a>@endif
+                                @if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}"><span title="Delete" class="glyphicon glyphicon-trash"></span></a>@endif
+                            </span>
+                        </td>
+                        <td><a href="{{ route('activities.show', ['id' => $activity->id]) }}" target="_blank">{{ $activity->getBriefDescription() }}</a></td>
                         <td><span style="white-space: nowrap">{{ $activity->date }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->quarter }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->country->name }}</span></td>
@@ -57,15 +63,12 @@
                         <td><span style="white-space: nowrap">{{ $activity->smart_ticket }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->customer }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->getBriefActivityExecuted() }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>
-                        <td><span style="white-space: nowrap">@if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}">Edit</a>@endif</span></td>
-                        <td><span style="white-space: nowrap">@if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a>@endif</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>                        
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>

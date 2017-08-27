@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label for="smartTicket" class="control-label col-md-4">Smart Ticket</label>
                         <div class="col-md-6">
-                            <input type="text" name="smartTicket" id="smartTicket" class="form-control">
+                            <input type="number" name="smartTicket" id="smartTicket" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -102,9 +102,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="activityExecuted" class="control-label col-md-4">Activity Executed</label>
+                        <label for="activityExecuted" class="control-label col-md-4">Activity Executed <span class="required-field">*</span></label>
                         <div class="col-md-6">
-                            <textarea name="activityExecuted" id="activityExecuted" cols="30" rows="5" class="form-control"></textarea>
+                            <textarea name="activityExecuted" id="activityExecuted" cols="30" required rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
