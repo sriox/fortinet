@@ -105,7 +105,7 @@
                 </tr>
                 @foreach($activity->works->sortByDesc('date') as $work)
                 <tr>
-                    <td>{{ $work->date }}</td>
+                    <td style="white-space: nowrap">{{ $work->date }}</td>
                     <td>{{ $work->description }}</td>
                     <td>{{ $work->time }}</td>
                     <td><a href="{{ route('activities.deletework', ['id' => $work->id]) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
