@@ -46,9 +46,10 @@
     <script src="{{ asset('plugins/fastclick/fastclick.min.js') }}"></script>
   
   <!--datatables styles-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/jquery.dataTables.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/dataTables.bootstrap.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/buttons.dataTables.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/buttons.jqueryui.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/css/buttons.dataTables.min.css') }}">
 
   <!--datatables scripts-->
     <script src="{{ asset('plugins/datatables/js/jquery.dataTables.js') }}"></script>
