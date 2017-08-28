@@ -100,19 +100,9 @@
                             <textarea name="description" id="description" cols="30" rows="5" class="form-control" required>{{ $activity->description }}</textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="activityExecuted" class="control-label col-md-4">Activity Executed <span class="required-field">*</span></label>
-                        <div class="col-md-6">
-                            <textarea name="activityExecuted" id="activityExecuted" required cols="30" rows="5" class="form-control">{{ $activity->activity_executed }}</textarea>
-                        </div>
-                    </div>
                     
-                    <div class="form-group">
-                        <label for="timeUsed" class="control-label col-md-4">Time Used (Hours)</label>
-                        <div class="col-md-6">
-                            <input type="number" step="0.01" name="timeUsed" id="timeUsed" class="form-control" value="{{ $activity->time_used }}">
-                        </div>
-                    </div>
+                    
+                    
                 </div>
                 <div class="panel-footer">
                     <div class="form-group">
