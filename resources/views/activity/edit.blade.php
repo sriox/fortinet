@@ -101,6 +101,20 @@
                         </div>
                     </div>
                     
+                    @if($activity->id == 0)
+                    <div class="form-group">
+                        <label for="activityExecuted" class="control-label col-md-4">Activity Executed <span class="required-field">*</span></label>
+                        <div class="col-md-6">
+                            <textarea name="activityExecuted" id="activityExecuted" cols="30" required rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeUsed" class="control-label col-md-4">Time Used (hours)  <span class="required-field">*</span></label>
+                        <div class="col-md-6">
+                            <input type="number" step="0.01" name="timeUsed" id="timeUsed" class="form-control" ><small><strong>(.) for decimals</strong></small>
+                        </div>
+                    </div>
+                    @endif
                     
                     
                 </div>
