@@ -37,39 +37,36 @@
                         <th>SE</th>
                         <th>Smart Ticket<br />&nbsp;</th>
                         <th>Customer<br />&nbsp;</th>
-                        <th>Activity Executed<br />&nbsp;</th>
                         <th>Time (H)<br />&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($activities as $activity)
                     <tr>
-                        <td><span style="white-space: nowrap">{{ $activity->user->name }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->activityType->name }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->member }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->activity_type }}</span></td>
                         <td>
                             <span style="white-space: nowrap">
-                                @if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all', 'copy' => true]) }}"><span title="Clone" class="glyphicon glyphicon-new-window"></span></a>@endif
-                                @if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}"><span title="Edit" class="glyphicon glyphicon-edit"></span></a>@endif
-                                @if($activity->user->id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}"><span title="Delete" class="glyphicon glyphicon-trash"></span></a>@endif
+                                @if($activity->user_id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all', 'copy' => true]) }}"><span title="Clone" class="glyphicon glyphicon-new-window"></span></a>@endif
+                                @if($activity->user_id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'all']) }}"><span title="Edit" class="glyphicon glyphicon-edit"></span></a>@endif
+                                @if($activity->user_id == Auth::id() || Auth::user()->profile->key == 'ADMIN')<a href="{{ route('activities.destroy', ['id' => $activity->id]) }}"><span title="Delete" class="glyphicon glyphicon-trash"></span></a>@endif
                             </span>
                         </td>
-                        <td><a href="{{ route('activities.show', ['id' => $activity->id]) }}" target="_blank">{{ $activity->getBriefDescription() }}</a></td>
+                        <td><a href="{{ route('activities.show', ['id' => $activity->id]) }}" target="_blank">{{ implode(' ', array_slice(explode(' ', $activity->description), 0, 10)) }}</a></td>
                         <td><span style="white-space: nowrap">{{ $activity->date }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->quarter }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->country->name }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->country->territory }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->technology->name }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->se->name }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->country }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->territory }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->technology }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->se }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->smart_ticket }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->customer }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->getBriefActivityExecuted() }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>                        
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
