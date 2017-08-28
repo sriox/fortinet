@@ -57,8 +57,6 @@ class User extends Authenticatable
     
     public function getWeekUsedHours()
     {
-        return DB::select('SELECT IFNULL(SUM(time_used), 0) as hours
-                                FROM activities
-                                WHERE user_id = '.$this->id.' AND DATE >= CURDATE() - INTERVAL (WEEKDAY(CURDATE())) DAY AND DATE <= CURDATE() - INTERVAL (WEEKDAY(CURDATE())-6) DAY')[0];
+        return DB::select('CALL USP_GET_WEEK_USER_HOURS(?)', array($this->id))[0];
     }
 }
