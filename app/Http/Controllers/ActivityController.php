@@ -35,7 +35,7 @@ class ActivityController extends Controller
     
     public function all()
     {
-        $activities = Activity::All()->sortBy('user_id');
+        $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES');
         // $activities = Activity::limit(50)->get();
         return view('activity.all', ['activities' => $activities]);
     }
@@ -110,13 +110,26 @@ class ActivityController extends Controller
                 'activity_id' => $activity->id,
                 'date' => $activity->date,
                 'description' => $request->input('activityExecuted'),
-                'time' => $request->input('timeUsed')
+                'time' => $request->input('timeUsed'),
+                'year' => $this->getYear($activity->date),
+                'quarter' => $this->quarter($activity->date),
+                'month' => $this->getMonth($activity->date)
             ]);
         });
 
         
         
         return redirect()->route('activities.index');
+    }
+
+    private function getYear($ts){
+        $date = date_create($ts);
+        return (int)date_format($date, 'Y');
+    }
+
+    private function getMonth($ts){
+        $date = date_create($ts);
+        return (int)date_format($date, 'n');
     }
     
     private function quarter($ts) {
@@ -199,10 +212,8 @@ class ActivityController extends Controller
             'country' => 'required',
             'technology' => 'required',
             'se' => 'required',
-            'description' => 'required',
-            'timeUsed' => 'required|numeric',
+            'description' => 'required',            
             'carrier' => 'required',
-            'activityExecuted' => 'required',
             'smartTicket' => 'nullable|numeric'
         ]);
         
@@ -217,8 +228,8 @@ class ActivityController extends Controller
         $activity->se_id = $request->input('se');
         $activity->customer = $request->input('customer');
         $activity->description = $request->input('description');
-        $activity->activity_executed = $request->input('activityExecuted');
-        $activity->time_used = $request->input('timeUsed');
+        //$activity->activity_executed = $request->input('activityExecuted');
+        //$activity->time_used = $request->input('timeUsed');
         $activity->carrier_id = $request->input('carrier');
         
         $activity->save();
@@ -260,7 +271,10 @@ class ActivityController extends Controller
             'activity_id' => $request->input('activityId'),
             'date' => $request->input('date'),
             'description' => $request->input('description'),
-            'time' => $request->input('time')
+            'time' => $request->input('time'),
+            'year' => $this->getYear($request->input('date')),
+            'quarter' => $this->quarter($request->input('date')),
+            'month' => $this->getMonth($request->input('date'))
         ]);
 
         return redirect()->back();

@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class Work extends Model
 {
-    protected $fillable = ['activity_id', 'date', 'description', 'time'];
+    protected $fillable = ['activity_id', 'date', 'description', 'time', 'year', 'quarter', 'month'];
     protected $dates = ['date'];
 
     public function activity()
