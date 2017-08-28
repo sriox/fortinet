@@ -246,6 +246,11 @@ class ActivityController extends Controller
     public function destroy($id)
     {
         $activity = Activity::find($id);
+
+        //buscar registros de work para eliminar
+        $works = Work::where('activity_id', '=', $activity->id);
+        $works->delete();
+
         $activity->delete();
         
         return redirect()->back()->with('msg', 'The activity was deleted');
