@@ -81,11 +81,12 @@
                         <form action="{{ route('activities.savework') }}" method="POST" class="form form-horizontal">
                             {{ csrf_field() }}
                             <input type="hidden" value="{{ $activity->id }}" name="activityId">
+                            <input type="hidden" value="0" id="hdnwork" name="workId">
                             <div class="row">
-                                <div class="col-md-2"><input type="text" placeholder="Date" required name="date" class="col-md-12 datepicker form-control"></div>
-                                <div class="col-md-6"><textarea name="description" id="" required cols="30" rows="2" class="form-control col-md-12"></textarea></div>
-                                <div class="col-md-2"><input type="number" name="time" required class="col-md-12 form-control" step="0.1"></div>
-                                <div class="col-md-2"><input type="submit" value="Add Work" class="btn btn-primary" /></div>
+                                <div class="col-md-2"><input type="text" placeholder="Date" id="txtdate" required name="date" class="col-md-12 datepicker form-control"></div>
+                                <div class="col-md-6"><textarea name="description" id="txtdescription" required cols="30" rows="2" class="form-control col-md-12"></textarea></div>
+                                <div class="col-md-2"><input type="number" name="time" id="txttime" required class="col-md-12 form-control" step="0.1"></div>
+                                <div class="col-md-2"><input type="submit" id="btnsubmit" value="Add Work" class="btn btn-primary" /></div>
                             </div>
                         </form>
                     </div>
@@ -96,11 +97,12 @@
            <div class="bg-info"><strong>Activity Works</strong> <span class="badge">{{ count($activity->works) }}</span></div>
            <div>
             <br/>
-            <table class="table table-striped">
+            <table class="table">
                 <tr>
                     <th>Date</th>
                     <th>Description</th>
                     <th>Time</th>
+                    <th>&nbsp;</th>
                     <th>&nbsp;</th>
                 </tr>
                 @foreach($activity->works->sortByDesc('date') as $work)
@@ -109,6 +111,7 @@
                     <td>{{ $work->description }}</td>
                     <td>{{ $work->time }}</td>
                     <td><a href="{{ route('activities.deletework', ['id' => $work->id]) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    <td><a href="#" class="btnedit" data-id="{{ $work->id }}" data-date="{{ $work->date }}" data-description="{{ $work->description }}" data-time="{{ $work->time }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                 </tr>
                 @endforeach
                 <tr>

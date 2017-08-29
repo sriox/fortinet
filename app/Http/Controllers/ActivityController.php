@@ -272,15 +272,25 @@ class ActivityController extends Controller
             'time' => 'required|numeric'
         ]);
 
-        Work::create([
-            'activity_id' => $request->input('activityId'),
-            'date' => $request->input('date'),
-            'description' => $request->input('description'),
-            'time' => $request->input('time'),
-            'year' => $this->getYear($request->input('date')),
-            'quarter' => $this->quarter($request->input('date')),
-            'month' => $this->getMonth($request->input('date'))
-        ]);
+        if($request->input('workId') == 0){
+            Work::create([
+                'activity_id' => $request->input('activityId'),
+                'date' => $request->input('date'),
+                'description' => $request->input('description'),
+                'time' => $request->input('time'),
+                'year' => $this->getYear($request->input('date')),
+                'quarter' => $this->quarter($request->input('date')),
+                'month' => $this->getMonth($request->input('date'))
+            ]);
+        }else{
+            $work = Work::find($request->input('workId'));
+            $work->date = $request->input('date');
+            $work->description = $request->input('description');
+            $work->time = $request->input('time');
+            $work->save();
+        }
+
+        
 
         return redirect()->back();
     }
