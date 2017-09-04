@@ -107,4 +107,6 @@ class Activity extends Model
 
         return $time;
     }
+
+    
 }
