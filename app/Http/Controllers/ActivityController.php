@@ -27,17 +27,27 @@ class ActivityController extends Controller
     {
         $usedHours = Auth::user()->getWeekUsedHours();
         $weekHours = Config::where('key', '=', 'WEEK_HOURS')->first();
+        $smartUrl = Config::where('key', '=', 'SMART_URL')->first();
         
         
         $activities = Activity::where('user_id', '=', Auth::id())->get()->sortByDesc('date');
-        return view('activity.index', ['activities' => $activities, 'usedHours' => $usedHours->hours, 'weekHours' => $weekHours->value]);
+        return view('activity.index', [
+            'activities' => $activities, 
+            'usedHours' => $usedHours->hours, 
+            'weekHours' => $weekHours->value,
+            'smartUrl' => $smartUrl
+        ]);
     }
     
     public function all()
     {
         $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES');
+        $smartUrl = Config::where('key', '=', 'SMART_URL')->first();
         // $activities = Activity::limit(50)->get();
-        return view('activity.all', ['activities' => $activities]);
+        return view('activity.all', [
+            'activities' => $activities,
+            'smartUrl' => $smartUrl
+        ]);
     }
 
     /**
@@ -83,7 +93,6 @@ class ActivityController extends Controller
             'description' => 'required',
             'timeUsed' => 'required|integer',
             'customer' => 'max:255',
-            'smartTicket' => 'nullable|numeric',
             'timeUsed' => 'numeric',
             'carrier' => 'required',
             'activityExecuted' => 'required'
@@ -213,8 +222,7 @@ class ActivityController extends Controller
             'technology' => 'required',
             'se' => 'required',
             'description' => 'required',            
-            'carrier' => 'required',
-            'smartTicket' => 'nullable|numeric'
+            'carrier' => 'required'
         ]);
         
         $activity = Activity::find($id);
