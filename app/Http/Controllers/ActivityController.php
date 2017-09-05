@@ -29,8 +29,8 @@ class ActivityController extends Controller
         $weekHours = Config::where('key', '=', 'WEEK_HOURS')->first();
         $smartUrl = Config::where('key', '=', 'SMART_URL')->first();
         
-        
-        $activities = Activity::where('user_id', '=', Auth::id())->get()->sortByDesc('date');
+        // $activities = Activity::where('user_id', '=', Auth::id())->get()->sortByDesc('date');
+        $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES(?)', array(Auth::id()));
         return view('activity.index', [
             'activities' => $activities, 
             'usedHours' => $usedHours->hours, 
@@ -41,7 +41,7 @@ class ActivityController extends Controller
     
     public function all()
     {
-        $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES');
+        $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES(?)', array(0));
         $smartUrl = Config::where('key', '=', 'SMART_URL')->first();
         // $activities = Activity::limit(50)->get();
         return view('activity.all', [
