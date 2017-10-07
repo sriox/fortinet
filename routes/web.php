@@ -36,10 +36,23 @@ Route::get('tests', [
 ]);
 
 Route::group(['middleware' => 'auth'], function(){
+
+    // REPORTS MODULE
     Route::get('dashboard', function(){
         return view('dashboard.index');
     })->name('dashboard.index');
 
+    Route::get('export', [
+        'uses' => 'ExportController@index',
+        'as' => 'export.index'
+    ]);
+
+    Route::post('export/download', [
+        'uses' => 'ExportController@download',
+        'as' => 'export.download'
+    ]);
+
+    // USERS MODULE
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', [
             'uses' => 'UsersController@index',
