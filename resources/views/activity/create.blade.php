@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label for="smartTicket" class="control-label col-md-4">Smart Ticket</label>
                         <div class="col-md-6">
-                            <input type="number" name="smartTicket" id="smartTicket" class="form-control">
+                            <input type="text" pattern="(\d+)(,\s*\d+)*" placeholder="1234 or 1234,5678,9101" name="smartTicket" id="smartTicket" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

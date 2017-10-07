@@ -27,17 +27,27 @@ class ActivityController extends Controller
     {
         $usedHours = Auth::user()->getWeekUsedHours();
         $weekHours = Config::where('key', '=', 'WEEK_HOURS')->first();
+        $smartUrl = Config::where('key', '=', 'SMART_URL')->first();
         
-        
-        $activities = Activity::where('user_id', '=', Auth::id())->get()->sortByDesc('date');
-        return view('activity.index', ['activities' => $activities, 'usedHours' => $usedHours->hours, 'weekHours' => $weekHours->value]);
+        // $activities = Activity::where('user_id', '=', Auth::id())->get()->sortByDesc('date');
+        $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES(?)', array(Auth::id()));
+        return view('activity.index', [
+            'activities' => $activities, 
+            'usedHours' => $usedHours->hours, 
+            'weekHours' => $weekHours->value,
+            'smartUrl' => $smartUrl
+        ]);
     }
     
     public function all()
     {
-        $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES');
+        $activities = DB::select('CALL USP_GET_ALL_ACTIVITIES(?)', array(0));
+        $smartUrl = Config::where('key', '=', 'SMART_URL')->first();
         // $activities = Activity::limit(50)->get();
-        return view('activity.all', ['activities' => $activities]);
+        return view('activity.all', [
+            'activities' => $activities,
+            'smartUrl' => $smartUrl
+        ]);
     }
 
     /**
@@ -83,7 +93,6 @@ class ActivityController extends Controller
             'description' => 'required',
             'timeUsed' => 'required|integer',
             'customer' => 'max:255',
-            'smartTicket' => 'nullable|numeric',
             'timeUsed' => 'numeric',
             'carrier' => 'required',
             'activityExecuted' => 'required'
@@ -213,8 +222,7 @@ class ActivityController extends Controller
             'technology' => 'required',
             'se' => 'required',
             'description' => 'required',            
-            'carrier' => 'required',
-            'smartTicket' => 'nullable|numeric'
+            'carrier' => 'required'
         ]);
         
         $activity = Activity::find($id);
@@ -246,6 +254,11 @@ class ActivityController extends Controller
     public function destroy($id)
     {
         $activity = Activity::find($id);
+
+        //buscar registros de work para eliminar
+        $works = Work::where('activity_id', '=', $activity->id);
+        $works->delete();
+
         $activity->delete();
         
         return redirect()->back()->with('msg', 'The activity was deleted');
@@ -267,15 +280,25 @@ class ActivityController extends Controller
             'time' => 'required|numeric'
         ]);
 
-        Work::create([
-            'activity_id' => $request->input('activityId'),
-            'date' => $request->input('date'),
-            'description' => $request->input('description'),
-            'time' => $request->input('time'),
-            'year' => $this->getYear($request->input('date')),
-            'quarter' => $this->quarter($request->input('date')),
-            'month' => $this->getMonth($request->input('date'))
-        ]);
+        if($request->input('workId') == 0){
+            Work::create([
+                'activity_id' => $request->input('activityId'),
+                'date' => $request->input('date'),
+                'description' => $request->input('description'),
+                'time' => $request->input('time'),
+                'year' => $this->getYear($request->input('date')),
+                'quarter' => $this->quarter($request->input('date')),
+                'month' => $this->getMonth($request->input('date'))
+            ]);
+        }else{
+            $work = Work::find($request->input('workId'));
+            $work->date = $request->input('date');
+            $work->description = $request->input('description');
+            $work->time = $request->input('time');
+            $work->save();
+        }
+
+        
 
         return redirect()->back();
     }

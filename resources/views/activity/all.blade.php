@@ -59,7 +59,18 @@
                         <td><span style="white-space: nowrap">{{ $activity->territory }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->technology }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->se }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->smart_ticket }}</span></td>
+                        <td><span style="white-space: nowrap">
+                        @php
+                            if(null != $activity->smart_ticket && $activity->smart_ticket != ''){
+                                $tickets = explode(',', $activity->smart_ticket);
+                                foreach($tickets as $ticket){
+                        @endphp
+                                <a href="{{ $smartUrl->value.trim($ticket) }}" target="_blank">{{ $ticket }}</a>&nbsp;
+                        @php
+                                }
+                            }
+                        @endphp
+                        </span></td>
                         <td><span style="white-space: nowrap">{{ $activity->customer }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>                        
                     </tr>

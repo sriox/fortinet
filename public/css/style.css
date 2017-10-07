@@ -38,3 +38,8 @@ body {
 .ui-button-text{
     color: black;
 }
+
+.row-editing {
+    background-color: green;
+    color: white;
+}

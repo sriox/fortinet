@@ -37,7 +37,6 @@
                         <th><span style="white-space: nowrap">SE</span></th>
                         <th><span style="white-space: nowrap">Smart Ticket</span></th>
                         <th><span style="white-space: nowrap">Customer</span></th>
-                        <th><span style="white-space: nowrap">Activity Executed</span></th>
                         <th><span style="white-space: nowrap">Time (H)</span></th>
                         <!--<th><span style="white-space: nowrap">Actions</span></th>
                         <th><span style="white-space: nowrap">&nbsp;</span></th>
@@ -46,9 +45,10 @@
                 </thead>
                 <tbody>
                     @foreach($activities as $activity)
+                    
                     <tr>
-                        <td><span style="white-space: nowrap">{{ $activity->user->name }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->activityType->name }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->member }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->activity_type }}</span></td>
                         <td>
                             <span style="white-space: nowrap">
                                 <a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index', 'copy' => true]) }}"><span title="Clone" class="glyphicon glyphicon-new-window"></span></a>
@@ -56,16 +56,26 @@
                                 <a href="{{ route('activities.destroy', ['id' => $activity->id]) }}"><span title="Edit" class="glyphicon glyphicon-trash"></span></a>
                             </span>
                         </td>
-                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}" target="_blank">{{ $activity->getBriefDescription()."..." }}</a></span></td>
+                        <td><span style="white-space: nowrap"><a href="{{ route('activities.show', ['id' => $activity->id]) }}" target="_blank">{{ implode(' ', array_slice(explode(' ', $activity->description), 0, 10)) }}</a></span></td>
                         <td><span style="white-space: nowrap">{{ $activity->date }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->quarter }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->country->name }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->country->territory }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->technology->name }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->se->name }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->smart_ticket }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->country }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->territory }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->technology }}</span></td>
+                        <td><span style="white-space: nowrap">{{ $activity->se }}</span></td>
+                        <td><span style="white-space: nowrap">
+                        @php
+                            if(null != $activity->smart_ticket && $activity->smart_ticket != ''){
+                                $tickets = explode(',', $activity->smart_ticket);
+                                foreach($tickets as $ticket){
+                        @endphp
+                                <a href="{{ $smartUrl->value.trim($ticket) }}" target="_blank">{{ $ticket }}</a>&nbsp;
+                        @php
+                                }
+                            }
+                        @endphp
+                        </span></td>
                         <td><span style="white-space: nowrap">{{ $activity->customer }}</span></td>
-                        <td><span style="white-space: nowrap">{{ $activity->getBriefActivityExecuted()."..." }}</span></td>
                         <td><span style="white-space: nowrap">{{ $activity->time_used }}</span></td>
                         <!--<td><span style="white-space: nowrap"><a href="{{ route('activities.edit', ['id' => $activity->id, 'page' => 'index']) }}">Edit</a></span></td>
                         <td><span style="white-space: nowrap"><a href="{{ route('activities.destroy', ['id' => $activity->id]) }}">Delete</a></span></td>
