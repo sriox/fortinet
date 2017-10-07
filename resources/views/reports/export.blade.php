@@ -17,8 +17,8 @@
                         <div class="row">
 
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="activity_type_id" class="control-label">Activity Type</label>
+                                <div class="form-group col-md-11">
+                                    <label for="activity_type_id" class="control-label">Activity Type <i class="fa fa-filter"></i></label>
                                     <select name="activity_type_id" id="activityType" class="form-control">
                                         <option value="0">-- Select --</option>
                                         @foreach($activityTypes as $at)
@@ -29,8 +29,8 @@
                             </div>
                             
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="country_id" class="control-label">Country</label>
+                                <div class="form-group col-md-11">
+                                    <label for="country_id" class="control-label">Country <i class="fa fa-filter"></i></label>
                                     <select name="country_id" id="country" class="form-control">
                                         <option value="0">-- Select --</option>
                                         @foreach($countries as $country)
@@ -40,8 +40,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="department_id" class="control-label">Department</label>
+                                <div class="form-group col-md-11">
+                                    <label for="department_id" class="control-label">Department <i class="fa fa-filter"></i></label>
                                     <select name="department_id" id="department" class="form-control">
                                         <option value="0">-- Select --</option>
                                         @foreach($departments as $department)
@@ -51,8 +51,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="carrier_id" class="control-label">Carrier</label>
+                                <div class="form-group col-md-11">
+                                    <label for="carrier_id" class="control-label">Carrier <i class="fa fa-filter"></i></label>
                                     <select name="carrier_id" id="carrier" class="form-control">
                                         <option value="0">-- Select --</option>
                                         @foreach($carriers as $carrier)
@@ -66,8 +66,8 @@
                         <div class="row">
 
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="ses_id" class="control-label">SES</label>
+                                <div class="form-group col-md-11">
+                                    <label for="ses_id" class="control-label">SES <i class="fa fa-filter"></i></label>
                                     <select name="ases_id" id="ses" class="form-control">
                                         <option value="0">-- Select --</option>
                                         @foreach($ses as $se)
@@ -77,8 +77,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="technology_id" class="control-label">Technology</label>
+                                <div class="form-group col-md-11">
+                                    <label for="technology_id" class="control-label">Technology <i class="fa fa-filter"></i></label>
                                     <select name="technology_id" id="technology" class="form-control">
                                         <option value="0">-- Select --</option>
                                         @foreach($technologies as $technology)
@@ -88,8 +88,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="user_id" class="control-label">User</label>
+                                <div class="form-group col-md-11">
+                                    <label for="user_id" class="control-label">User <i class="fa fa-filter"></i></label>
                                     <select name="user_id" id="user" class="form-control">
                                         <option value="0">-- Select --</option>
                                         @foreach($users as $user)
@@ -98,8 +98,38 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group col-md-11">
+                                    <label for="year" class="control-label">Year <i class="fa fa-filter"></i></label>
+                                    <select name="year" id="year" class="form-control">
+                                        <option value="0">-- Select --</option>
+                                        @foreach($years as $year)
+                                        <option value="{{ $year->year }}">{{ $year->year }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             
-                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group col-md-11">
+                                    <label for="quarter" class="control-label">Quarter <i class="fa fa-filter"></i></label>
+                                    <select name="quarter" id="quarter" class="form-control">
+                                        <option value="0">-- Select --</option>
+                                        <option value="1">Q1</option>
+                                        <option value="2">Q2</option>
+                                        <option value="3">Q3</option>
+                                        <option value="4">Q4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-10">
+                                <button type="submit" class="btn btn-primary">Download</button>
+                            </div>
                         </div>
                     </form>
                     </div>

@@ -17,6 +17,7 @@ class ExportController extends Controller
 {
     public function index()
     {
+        $years = DB::select('CALL USP_GET_YEARS');
         return view('reports.export', [
             'activityTypes' => ActivityType::all(),
             'departments' => Department::all(),
@@ -24,13 +25,14 @@ class ExportController extends Controller
             'countries' => Country::all(),
             'technologies' => Technology::all(),
             'users' => User::all(),
-            'carriers' => Carrier::all()
+            'carriers' => Carrier::all(),
+            'years' => $years
         ]);
     }
 
     public function download(Request $request)
     {
-        $activitiesRaw = DB::select('CALL `fortinet`.`USP_GET_ACTIVITIES_TO_EXPORT`(?, ?, ?, ?, ?, ?, ?)', [
+        $activitiesRaw = DB::select('CALL `fortinet`.`USP_GET_ACTIVITIES_TO_EXPORT`(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             (int)$request->input('activity_type_id'),
             (int)$request->input('carrier_id'),
             (int)$request->input('country_id'),
@@ -38,6 +40,8 @@ class ExportController extends Controller
             (int)$request->input('se_id'),
             (int)$request->input('technology_id'),
             (int)$request->input('user_id'),
+            (int)$request->input('year'),
+            (int)$request->input('quarter'),
         ]);
 
         $activities = $this->dataToArray($activitiesRaw);
