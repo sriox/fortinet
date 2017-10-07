@@ -32,7 +32,7 @@ class ExportController extends Controller
 
     public function download(Request $request)
     {
-        $activitiesRaw = DB::select('CALL `fortinet`.`USP_GET_ACTIVITIES_TO_EXPORT`(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        $activitiesRaw = DB::select('CALL USP_GET_ACTIVITIES_TO_EXPORT(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             (int)$request->input('activity_type_id'),
             (int)$request->input('carrier_id'),
             (int)$request->input('country_id'),
