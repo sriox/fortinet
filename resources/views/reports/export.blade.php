@@ -41,6 +41,17 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group col-md-11">
+                                    <label for="territory" class="control-label">Territory <i class="fa fa-filter"></i></label>
+                                    <select name="territory" id="territory" class="form-control">
+                                        <option value="">-- Select --</option>
+                                        @foreach($territories as $territory)
+                                        <option value="{{ $territory->name }}">{{ $territory->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group col-md-11">
                                     <label for="department_id" class="control-label">Department <i class="fa fa-filter"></i></label>
                                     <select name="department_id" id="department" class="form-control">
                                         <option value="0">-- Select --</option>
@@ -50,6 +61,10 @@
                                     </select>
                                 </div>
                             </div>
+                            
+
+                        </div>
+                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group col-md-11">
                                     <label for="carrier_id" class="control-label">Carrier <i class="fa fa-filter"></i></label>
@@ -61,10 +76,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="row">
-
                             <div class="col-md-3">
                                 <div class="form-group col-md-11">
                                     <label for="ses_id" class="control-label">SES <i class="fa fa-filter"></i></label>
@@ -98,6 +109,10 @@
                                     </select>
                                 </div>
                             </div>
+                            
+                            
+                        </div>
+                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group col-md-11">
                                     <label for="year" class="control-label">Year <i class="fa fa-filter"></i></label>
@@ -109,9 +124,6 @@
                                     </select>
                                 </div>
                             </div>
-                            
-                        </div>
-                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group col-md-11">
                                     <label for="quarter" class="control-label">Quarter <i class="fa fa-filter"></i></label>
@@ -122,6 +134,18 @@
                                         <option value="3">Q3</option>
                                         <option value="4">Q4</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group col-md-11">
+                                    <label for="dateIni" class="control-label">From <i class="fa fa-filter"></i></label>
+                                    <input type="text" name="dateIni" id="dateIni" class="datepicker form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group col-md-11">
+                                    <label for="dateEnd" class="control-label">To <i class="fa fa-filter"></i></label>
+                                    <input type="text" name="dateEnd" id="dateEnd" class="datepicker form-control">
                                 </div>
                             </div>
                             
@@ -139,5 +163,5 @@
         </div>
     </div>
 </div>
-
+<script src="{{ asset('js/reports.export.js') }}"></script>
 @endsection
