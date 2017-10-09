@@ -18,6 +18,7 @@ class ExportController extends Controller
     public function index()
     {
         $years = DB::select('CALL USP_GET_YEARS');
+        $territories = DB::select('CALL USP_GET_TERRITORIES');
         return view('reports.export', [
             'activityTypes' => ActivityType::all(),
             'departments' => Department::all(),
@@ -26,13 +27,16 @@ class ExportController extends Controller
             'technologies' => Technology::all(),
             'users' => User::all(),
             'carriers' => Carrier::all(),
-            'years' => $years
+            'years' => $years,
+            'territories' => $territories
         ]);
     }
 
     public function download(Request $request)
     {
-        $activitiesRaw = DB::select('CALL USP_GET_ACTIVITIES_TO_EXPORT(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+
+
+        $activitiesRaw = DB::select('CALL USP_GET_ACTIVITIES_TO_EXPORT(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             (int)$request->input('activity_type_id'),
             (int)$request->input('carrier_id'),
             (int)$request->input('country_id'),
@@ -42,6 +46,9 @@ class ExportController extends Controller
             (int)$request->input('user_id'),
             (int)$request->input('year'),
             (int)$request->input('quarter'),
+            (string)$request->input('territory'),
+            (string)$request->input('dateIni'),
+            (string)$request->input('dateEnd'),
         ]);
 
         $activities = $this->dataToArray($activitiesRaw);
