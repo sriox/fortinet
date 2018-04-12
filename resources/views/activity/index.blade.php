@@ -34,7 +34,7 @@
                         <th><span style="white-space: nowrap">Country</span></th>
                         <th><span style="white-space: nowrap">Territory</span></th>
                         <th><span style="white-space: nowrap">Technology</span></th>
-                        <th><span style="white-space: nowrap">SE</span></th>
+                        <th><span style="white-space: nowrap">SE / Inside Sales Rep</span></th>
                         <th><span style="white-space: nowrap">Smart Ticket</span></th>
                         <th><span style="white-space: nowrap">Customer</span></th>
                         <th><span style="white-space: nowrap">Time (H)</span></th>

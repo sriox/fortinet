@@ -14,7 +14,7 @@
                 "visible": false            
             }
         ],
-        scrollY: 350,
+        scrollY: 700,
         scrollX: true,
         pageLength: 50,
         fnDrawCallback: function(){

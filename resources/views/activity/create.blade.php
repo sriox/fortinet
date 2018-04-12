@@ -69,12 +69,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="se" class="control-label col-md-4">SE <span class="required-field">*</span></label>
+                        <label for="se" class="control-label col-md-4">SE / Inside Sales Rep <span class="required-field">*</span></label>
                         <div class="col-md-6">
                             <select name="se" id="se" class="form-control" required>
                                 <option value="">-- Select --</option>
                                 @foreach($ses as $se)
-                                <option value="{{ $se->id }}">{{ $se->name }}</option>
+                                <option value="{{ $se->id }}" {{ strtolower(trim($se->name)) == 'none'?'selected':'' }}>{{ $se->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -84,7 +84,7 @@
                         <div class="col-md-6">
                             <select name="carrier" id="carrier" class="form-control" required>                                
                                 @foreach($carriers as $carrier)
-                                <option value="{{ $carrier->id }}" {{ $carrier->name == 'None'? 'selected': '' }}>{{ $carrier->name }}</option>
+                                <option value="{{ $carrier->id }}" {{ strtolower(trim($carrier->name)) == 'none'? 'selected': '' }}>{{ $carrier->name }}</option>
                                 @endforeach
                             </select>
                         </div>
