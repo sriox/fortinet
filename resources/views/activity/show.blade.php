@@ -73,7 +73,7 @@
                    <td>{{ $activity->time_used }}</td>
                </tr>-->
            </table>
-           <div class="bg-info"><strong>Add Work</strong></div>
+           <div class="bg-info"><strong>Add Task</strong></div>
            <div class="row">
                 <br />
                 <div class="col-md-12">
@@ -86,7 +86,7 @@
                                 <div class="col-md-2"><input type="text" placeholder="Date" id="txtdate" required name="date" class="col-md-12 datepicker form-control"></div>
                                 <div class="col-md-6"><textarea name="description" id="txtdescription" required cols="30" rows="2" class="form-control col-md-12"></textarea></div>
                                 <div class="col-md-2"><input type="number" name="time" id="txttime" required class="col-md-12 form-control" step="0.1"></div>
-                                <div class="col-md-2"><input type="submit" id="btnsubmit" value="Add Work" class="btn btn-primary" /></div>
+                                <div class="col-md-2"><input type="submit" id="btnsubmit" value="Add Task" class="btn btn-primary" /></div>
                             </div>
                         </form>
                     </div>
@@ -94,7 +94,7 @@
                
            </div>
            <br/>
-           <div class="bg-info"><strong>Activity Works</strong> <span class="badge">{{ count($activity->works) }}</span></div>
+           <div class="bg-info"><strong>Activity Tasks</strong> <span class="badge">{{ count($activity->works) }}</span></div>
            <div>
             <br/>
             <table class="table">
